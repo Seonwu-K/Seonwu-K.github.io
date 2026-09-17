@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>김선우 | Backend Developer Portfolio</title>
-<meta name="description" content="AI를 신뢰하되 검증하는 백엔드 개발자 김선우의 포트폴리오. 실서비스 운영, 장애 원인 추적, RAG 정량 검증 경험.">
+<meta name="description" content="AI를 신뢰하되 검증하는 백엔드 개발자 김선우의 포트폴리오. 동시성·장애·지연 문제를 측정과 재현으로 해결한 사례 모음.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="김선우 | Backend Developer Portfolio">
-<meta property="og:description" content="AI를 신뢰하되 검증하는 백엔드 개발자. 기획부터 배포·운영·개선까지 직접 책임진 프로젝트 모음.">
+<meta property="og:description" content="AI를 신뢰하되 검증하는 백엔드 개발자. 문제 원인 · 해결 과정 · 결과로 정리한 문제 해결 사례.">
 <meta property="og:url" content="https://seonwu-k.github.io/">
 <meta name="theme-color" content="#1B5FA8">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%231B5FA8'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='30' font-weight='700' fill='white'>SW</text></svg>">
@@ -16,18 +16,24 @@
   :root {
     --bg: #fbfbfa;
     --surface: #ffffff;
+    --sunken: #f4f5f6;
     --ink: #17191c;
     --ink-2: #4a4f57;
     --ink-3: #7b818a;
-    --line: #e6e7e9;
+    --line: #e3e5e8;
     --accent: #1b5fa8;
     --accent-soft: #eaf1fa;
-    --tag: #f2f3f5;
+    --tag: #f0f1f3;
+    --bad: #b4412a;
+    --bad-soft: #fbeeea;
+    --good: #1c7a45;
+    --good-soft: #e9f5ee;
   }
   @media (prefers-color-scheme: dark) {
     :root {
       --bg: #0f1113;
       --surface: #171a1e;
+      --sunken: #121417;
       --ink: #eceef1;
       --ink-2: #b4bac3;
       --ink-3: #868d97;
@@ -35,6 +41,10 @@
       --accent: #6aa5ec;
       --accent-soft: #16263a;
       --tag: #22262c;
+      --bad: #f08b72;
+      --bad-soft: #2e1b16;
+      --good: #6fcf97;
+      --good-soft: #14281d;
     }
   }
   * { box-sizing: border-box; }
@@ -51,32 +61,24 @@
   }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; text-underline-offset: 3px; }
-  .wrap { max-width: 920px; margin: 0 auto; padding-inline: 24px; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.88em; background: var(--tag); padding: 1px 5px; border-radius: 5px; word-break: break-all; }
+  .wrap { max-width: 960px; margin: 0 auto; padding-inline: 24px; }
 
   /* Header */
-  .top {
-    position: sticky; top: 0; z-index: 10;
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: saturate(160%) blur(10px);
-    border-bottom: 1px solid var(--line);
-  }
+  .top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: saturate(160%) blur(10px); border-bottom: 1px solid var(--line); }
   .top .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; }
-  .top .brand { font-weight: 700; color: var(--ink); letter-spacing: -0.01em; }
+  .top .brand { font-weight: 700; color: var(--ink); }
   .top nav { display: flex; gap: 20px; font-size: 14px; }
   .top nav a { color: var(--ink-2); }
 
   /* Hero */
-  .hero { padding-block: 72px 48px; }
-  .eyebrow { font-size: 14px; font-weight: 600; color: var(--accent); letter-spacing: 0.02em; margin: 0 0 12px; }
+  .hero { padding-block: 72px 44px; }
+  .eyebrow { font-size: 14px; font-weight: 600; color: var(--accent); margin: 0 0 12px; }
   .hero h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.3; letter-spacing: -0.03em; margin: 0 0 20px; font-weight: 800; }
   .hero h1 span { color: var(--accent); }
-  .hero p.lead { font-size: 17px; color: var(--ink-2); max-width: 680px; margin: 0 0 28px; }
-  .links { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
-  .btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    padding: 9px 16px; border-radius: 10px; font-size: 14px; font-weight: 600;
-    border: 1px solid var(--line); background: var(--surface); color: var(--ink);
-  }
+  .lead { font-size: 17px; color: var(--ink-2); max-width: 700px; margin: 0 0 28px; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 10px; font-size: 14px; font-weight: 600; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
   .btn:hover { border-color: var(--accent); text-decoration: none; }
   .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
   @media (prefers-color-scheme: dark) { .btn.primary { color: #0f1113; } }
@@ -84,44 +86,75 @@
   .facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
   .facts li { font-size: 13px; color: var(--ink-2); background: var(--tag); padding: 4px 10px; border-radius: 999px; }
 
-  /* Highlights */
-  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 72px; }
+  .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 80px; }
   .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 18px 16px; }
   .stat b { display: block; font-size: 22px; letter-spacing: -0.02em; line-height: 1.3; margin-bottom: 6px; font-variant-numeric: tabular-nums; }
   .stat span { display: block; font-size: 13px; color: var(--ink-3); line-height: 1.5; }
 
-  /* Sections */
-  section { margin-bottom: 80px; scroll-margin-top: 72px; }
-  h2.sec { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 24px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  section { margin-bottom: 88px; scroll-margin-top: 72px; }
+  .sec-head { margin: 0 0 28px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .sec-head h2 { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 4px; }
+  .sec-head p { margin: 0; font-size: 15px; color: var(--ink-2); }
 
-  /* Projects */
-  .project { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 28px; margin-bottom: 20px; }
-  .p-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
-  .p-head h3 { font-size: 22px; letter-spacing: -0.02em; margin: 0; line-height: 1.4; }
-  .p-head .period { font-size: 14px; color: var(--ink-3); white-space: nowrap; font-variant-numeric: tabular-nums; }
-  .p-meta { font-size: 14px; color: var(--ink-2); margin: 4px 0 14px; }
-  .badge { display: inline-block; font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accent-soft); padding: 2px 8px; border-radius: 6px; margin-right: 6px; vertical-align: 1px; }
-  .p-summary { margin: 0 0 18px; color: var(--ink); }
-  .items { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 14px; }
-  .items li { padding-left: 16px; border-left: 2px solid var(--line); }
-  .items h4 { font-size: 15px; margin: 0 0 4px; letter-spacing: -0.01em; }
-  .items p { margin: 0; font-size: 15px; color: var(--ink-2); }
-  .items em { font-style: normal; font-weight: 700; color: var(--ink); }
-  .p-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; padding-top: 16px; border-top: 1px dashed var(--line); }
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  /* Problem-solving cases */
+  .case { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 32px; margin-bottom: 28px; scroll-margin-top: 72px; }
+  .case-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 10px; font-size: 13px; color: var(--ink-3); }
+  .case-no { font-weight: 800; color: var(--accent); font-variant-numeric: tabular-nums; }
+  .proj { font-weight: 600; color: var(--ink-2); background: var(--tag); padding: 2px 9px; border-radius: 6px; }
+  .case h3 { font-size: 21px; line-height: 1.5; letter-spacing: -0.02em; margin: 0 0 22px; }
+  .label { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--accent); margin: 0 0 10px; }
+  .label::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  figure { margin: 0 0 26px; }
+  .fig { background: var(--sunken); border: 1px solid var(--line); border-radius: 14px; padding: 18px; overflow-x: auto; }
+  .fig svg { display: block; width: 100%; min-width: 640px; height: auto; }
+  figcaption { font-size: 13px; color: var(--ink-3); margin-top: 8px; }
+  .psr { display: grid; gap: 22px; }
+  .psr ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+  .psr li { color: var(--ink-2); font-size: 15px; }
+  .psr li::marker { color: var(--ink-3); }
+  .psr li b { color: var(--ink); }
+  .result li b { color: var(--good); }
+
+  /* SVG diagram vocabulary */
+  .d-box { fill: var(--surface); stroke: var(--ink-3); stroke-width: 1.2; }
+  .d-hl { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.4; }
+  .d-bad { fill: var(--bad-soft); stroke: var(--bad); stroke-width: 1.4; }
+  .d-good { fill: var(--good-soft); stroke: var(--good); stroke-width: 1.4; }
+  .d-line { stroke: var(--ink-2); stroke-width: 1.4; fill: none; }
+  .d-dash { stroke: var(--ink-3); stroke-width: 1.2; fill: none; stroke-dasharray: 4 4; }
+  .d-line-bad { stroke: var(--bad); stroke-width: 1.6; fill: none; }
+  .d-line-good { stroke: var(--good); stroke-width: 1.6; fill: none; }
+  .d-t { fill: var(--ink); font-size: 13px; font-weight: 600; }
+  .d-s { fill: var(--ink-2); font-size: 11.5px; }
+  .d-m { fill: var(--ink-3); font-size: 11px; }
+  .d-h { fill: var(--ink-3); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; }
+  .d-tb { fill: var(--bad); font-size: 12px; font-weight: 700; }
+  .d-tg { fill: var(--good); font-size: 12px; font-weight: 700; }
+  .d-ta { fill: var(--accent); font-size: 12px; font-weight: 700; }
+  .d-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .ah { fill: var(--ink-2); }
+  .ah-bad { fill: var(--bad); }
+  .ah-good { fill: var(--good); }
+
+  /* Projects overview */
+  .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .pcard { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+  .pcard h3 { font-size: 18px; margin: 0; }
+  .pmeta { font-size: 13px; color: var(--ink-3); }
+  .pcard p { margin: 0; font-size: 14px; color: var(--ink-2); }
+  .pcard ul { margin: 0; padding-left: 18px; font-size: 14px; color: var(--ink-2); display: grid; gap: 4px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 6px; }
   .tags span { font-size: 12px; color: var(--ink-2); background: var(--tag); padding: 3px 8px; border-radius: 6px; }
-  .p-links { display: flex; gap: 14px; font-size: 14px; font-weight: 600; }
+  .plinks { display: flex; flex-wrap: wrap; gap: 14px; font-size: 14px; font-weight: 600; }
 
-  /* Two-column lists */
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
   .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
   .card h3 { font-size: 16px; margin: 0 0 12px; }
   .tl { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
   .tl b { display: block; font-size: 15px; }
   .tl span { display: block; font-size: 14px; color: var(--ink-3); }
   .tl p { margin: 2px 0 0; font-size: 14px; color: var(--ink-2); }
-
-  .skills { display: grid; gap: 14px; }
+  .skills { display: grid; gap: 14px; margin: 0; }
   .skills div { display: grid; grid-template-columns: 110px 1fr; gap: 12px; align-items: baseline; }
   .skills dt { font-size: 13px; font-weight: 700; color: var(--ink-3); }
   .skills dd { margin: 0; font-size: 15px; }
@@ -132,13 +165,15 @@
   @media (max-width: 760px) {
     .top nav { display: none; }
     .hero { padding-block: 48px 36px; }
-    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 56px; }
+    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 64px; }
     .stat { padding: 16px 14px 14px; }
     .stat b { font-size: 18px; white-space: nowrap; }
-    .project { padding: 22px 18px; }
-    .grid2 { grid-template-columns: 1fr; }
+    .case { padding: 22px 16px; border-radius: 16px; }
+    .case h3 { font-size: 18px; }
+    .fig { padding: 12px; }
+    .projects, .grid2 { grid-template-columns: 1fr; }
     .skills div { grid-template-columns: 1fr; gap: 2px; }
-    section { margin-bottom: 64px; }
+    section { margin-bottom: 72px; }
   }
 </style>
 </head>
@@ -148,10 +183,11 @@
   <div class="wrap">
     <a class="brand" href="#">김선우</a>
     <nav aria-label="섹션">
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#certs">Certifications</a>
+      <a href="#cases">문제 해결</a>
+      <a href="#projects">프로젝트</a>
+      <a href="#experience">경력·학력</a>
+      <a href="#skills">기술</a>
+      <a href="#certs">수상·자격</a>
     </nav>
   </div>
 </header>
@@ -163,8 +199,8 @@
     <h1 id="hero-title">AI를 신뢰하되 <span>검증하는</span><br>백엔드 개발자입니다.</h1>
     <p class="lead">
       서비스를 기획부터 배포·운영까지 직접 책임지고, 실사용자 피드백으로 개선해 왔습니다.
-      AI 도구를 적극적으로 쓰지만 결과를 그대로 믿지 않고, 장애는 로그와 재현 테스트로 원인을 특정하고
-      개선은 수치로 확인합니다.
+      AI 도구를 적극적으로 쓰지만 결과를 그대로 믿지 않습니다. 장애는 로그와 재현 테스트로 원인을 특정하고,
+      개선은 다시 측정해 확인합니다.
     </p>
     <div class="links">
       <a class="btn primary" href="mailto:sunwoo005@naver.com">
@@ -172,7 +208,7 @@
         sunwoo005@naver.com
       </a>
       <a class="btn" href="https://github.com/Seonwu-K" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.82 1.19 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.050-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.170-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.82 1.19 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
         GitHub
       </a>
       <a class="btn" href="https://kimjoraeng.tistory.com/" target="_blank" rel="noopener">
@@ -188,122 +224,443 @@
   </section>
 
   <div class="stats" role="list">
-    <div class="stat" role="listitem"><b>대상 (1위)</b><span>UMC 6기 데모데이, 약 60개 팀 중 · LinkZip 백엔드 리드</span></div>
+    <div class="stat" role="listitem"><b>50 / 50</b><span>동시 좋아요 요청 성공 (락 도입 전엔 5건 동시에 500 재현)</span></div>
+    <div class="stat" role="listitem"><b>0.44 → 0.07초</b><span>구간 측정으로 찾은 API 기본 지연 해소</span></div>
     <div class="stat" role="listitem"><b>46.7% → 8.5%</b><span>RAG 적용 전후 환각률 (정확도 82% → 93%)</span></div>
-    <div class="stat" role="listitem"><b>53 → 4회</b><span>N+1 해소로 목록 API 쿼리 수 감소 (응답 55ms → 25ms)</span></div>
-    <div class="stat" role="listitem"><b>101KB → 3.2KB</b><span>Claude Code·Codex가 매 세션 읽는 컨텍스트 경량화</span></div>
+    <div class="stat" role="listitem"><b>대상 (1위)</b><span>UMC 6기 데모데이, 약 60개 팀 중</span></div>
   </div>
 
-  <section id="projects" aria-labelledby="projects-title">
-    <h2 class="sec" id="projects-title">Projects</h2>
+  <section id="cases" aria-labelledby="cases-title">
+    <div class="sec-head">
+      <h2 id="cases-title">Problem Solving</h2>
+      <p>각 사례는 그림 · 문제 원인 · 해결 과정 · 결과 순서로 정리했습니다.</p>
+    </div>
 
-    <article class="project">
-      <div class="p-head">
-        <h3>Layer Archive</h3>
-        <span class="period">2026.05 – 현재</span>
-      </div>
-      <p class="p-meta"><span class="badge">실서비스 운영 중</span>그림 수업 관리 시스템(LMS) 겸 게임화 커뮤니티 · 일러스트 강사 의뢰 · 개인 개발</p>
-      <p class="p-summary">강의 수강생이 과제를 제출하고 작품을 아카이빙하는 서비스를 직접 만들고 운영하며, 운영 환경에서 드러난 동시성·장애·성능 문제를 원인부터 해결했습니다.</p>
-      <ul class="items">
-        <li>
-          <h4>동시 좋아요 요청의 중복 카운트 → 멱등 API로 재설계</h4>
-          <p>동시 요청에서 발생한 <code>StaleObjectStateException</code>과 중복 카운트를 실제 Postgres 부하 테스트로 재현했습니다. 벌크 삭제·비관적 락을 거쳐, 토글 API를 "원하는 최종 상태를 지정하는" <em>멱등 API로 재설계</em>해 재시도에도 안전한 구조로 근본 해결했습니다.</p>
-        </li>
-        <li>
-          <h4>배포 환경에서만 나는 500 에러 → 통합 테스트 도입</h4>
-          <p>Postgres 배포 환경에서만 갤러리·아카이브 조회 API가 실패하는 장애를 로그의 함수 오류 메시지까지 추적해 <em>H2/Postgres 타입 추론 차이</em>를 원인으로 특정했습니다. 같은 유형의 회귀를 막기 위해 Testcontainers 기반 Postgres 통합 테스트를 도입했습니다.</p>
-        </li>
-        <li>
-          <h4>N+1 쿼리 → 목록 전용 DTO 분리</h4>
-          <p>게시글마다 이미지 컬렉션을 지연 로딩하던 목록 API를 경량 DTO로 분리했습니다. 두 경로를 로컬 벤치마크로 비교해 게시글 50건 기준 <em>쿼리 53회 → 4회, 응답 55ms → 25ms</em>를 확인했습니다.</p>
-        </li>
-        <li>
-          <h4>사용자 기준으로 고친 운영</h4>
-          <p>익명으로 불편 사항을 남기는 창구를 만들어 의견을 모으고, 로그인 방식 간소화와 영문 화면의 한글화처럼 실제 요청이 들어온 것부터 반영했습니다.</p>
-        </li>
-        <li>
-          <h4>AI 에이전트와 협업하는 개발 구조</h4>
-          <p>Claude Code와 Codex 두 coding agent가 같은 규칙 원본을 공유하도록 재설계하고, 세션마다 읽던 컨텍스트를 <em>101KB에서 3.2KB</em> 핵심 인덱스로 줄여 실제 작업에 쓸 컨텍스트를 확보했습니다.</p>
-        </li>
-      </ul>
-      <div class="p-foot">
-        <div class="tags"><span>Java 21</span><span>Spring Boot 3.4</span><span>PostgreSQL</span><span>Testcontainers</span><span>Next.js 15</span><span>React 19</span><span>TypeScript</span></div>
-        <div class="p-links"><a href="https://www.layerarchive.work" target="_blank" rel="noopener">서비스 ↗</a></div>
+    <!-- 01 -->
+    <article class="case" id="case-like">
+      <div class="case-top"><span class="case-no">01</span><span class="proj">Layer Archive</span><span>그림 수업 관리 시스템 · 실서비스 운영 · 2026.07 – 2026.08</span></div>
+      <h3>동시 좋아요 요청의 경합과 재시도 불안정을 User 행 비관적 락과 멱등 PUT API로 해결</h3>
+
+      <figure>
+        <p class="label">요청 흐름 (변경 전 / 후)</p>
+        <div class="fig">
+          <svg viewBox="0 0 720 330" role="img" aria-labelledby="f1t">
+            <title id="f1t">변경 전에는 동시 토글 요청이 둘 다 좋아요 없음을 확인하고 INSERT해 unique 위반 500이 나고, 변경 후에는 User 행 잠금으로 직렬화되고 PUT liked=true가 멱등하게 처리된다</title>
+            <defs>
+              <marker id="m1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0L10 5L0 10z"/></marker>
+              <marker id="m1b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah-bad" d="M0 0L10 5L0 10z"/></marker>
+              <marker id="m1g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah-good" d="M0 0L10 5L0 10z"/></marker>
+            </defs>
+            <text class="d-h" x="0" y="14">BEFORE · POST 토글 (현재 상태 반전)</text>
+            <text class="d-h" x="376" y="14">AFTER · PUT 최종 상태 지정 + 행 잠금</text>
+            <line x1="358" y1="4" x2="358" y2="326" class="d-dash"/>
+
+            <rect class="d-box" x="0" y="30" width="160" height="40" rx="8"/><text class="d-t" x="80" y="55" text-anchor="middle">요청 A · POST /like</text>
+            <rect class="d-box" x="176" y="30" width="160" height="40" rx="8"/><text class="d-t" x="256" y="55" text-anchor="middle">요청 B · POST /like</text>
+            <path class="d-line" d="M80 70V96" marker-end="url(#m1)"/><path class="d-line" d="M256 70V96" marker-end="url(#m1)"/>
+            <rect class="d-box" x="0" y="100" width="336" height="44" rx="8"/>
+            <text class="d-t" x="168" y="120" text-anchor="middle">LikeService · 좋아요 존재 여부 확인</text>
+            <text class="d-s" x="168" y="136" text-anchor="middle">A와 B 모두 "없음"을 읽음 (확인과 쓰기 사이 경합)</text>
+            <path class="d-line" d="M168 144V168" marker-end="url(#m1)"/>
+            <rect class="d-box" x="0" y="172" width="336" height="40" rx="8"/>
+            <text class="d-t" x="168" y="197" text-anchor="middle">둘 다 INSERT INTO likes</text>
+            <path class="d-line-bad" d="M168 212V236" marker-end="url(#m1b)"/>
+            <rect class="d-bad" x="0" y="240" width="336" height="40" rx="8"/>
+            <text class="d-tb" x="168" y="265" text-anchor="middle">unique 제약 위반 → 500 (동시 5건으로 재현)</text>
+            <text class="d-s" x="0" y="304">응답이 늦어 재시도하면 두 번째 토글이</text>
+            <text class="d-s" x="0" y="320">첫 요청이 추가한 좋아요를 <tspan class="d-tb">삭제</tspan> (토글은 멱등하지 않음)</text>
+
+            <rect class="d-box" x="376" y="30" width="164" height="40" rx="8"/><text class="d-t" x="458" y="48" text-anchor="middle">요청 A · PUT /like</text><text class="d-s d-mono" x="458" y="63" text-anchor="middle">{"liked": true}</text>
+            <rect class="d-box" x="556" y="30" width="164" height="40" rx="8"/><text class="d-t" x="638" y="48" text-anchor="middle">요청 B · PUT /like</text><text class="d-s d-mono" x="638" y="63" text-anchor="middle">{"liked": true}</text>
+            <path class="d-line" d="M458 70V96" marker-end="url(#m1)"/><path class="d-line" d="M638 70V96" marker-end="url(#m1)"/>
+            <rect class="d-hl" x="376" y="100" width="344" height="44" rx="8"/>
+            <text class="d-t" x="548" y="120" text-anchor="middle">User 행 비관적 락 (SELECT … FOR UPDATE)</text>
+            <text class="d-s" x="548" y="136" text-anchor="middle">같은 사용자의 요청을 한 줄로 직렬화</text>
+            <path class="d-line" d="M458 144V168" marker-end="url(#m1)"/><path class="d-line" d="M638 144V168" marker-end="url(#m1)"/>
+            <rect class="d-box" x="376" y="172" width="164" height="40" rx="8"/><text class="d-t" x="458" y="190" text-anchor="middle">A 먼저 · 없음</text><text class="d-s" x="458" y="205" text-anchor="middle">→ INSERT</text>
+            <rect class="d-box" x="556" y="172" width="164" height="40" rx="8"/><text class="d-t" x="638" y="190" text-anchor="middle">B 대기 후 · 이미 liked</text><text class="d-s" x="638" y="205" text-anchor="middle">→ 아무것도 안 함 (no-op)</text>
+            <path class="d-line-good" d="M458 212V236" marker-end="url(#m1g)"/><path class="d-line-good" d="M638 212V236" marker-end="url(#m1g)"/>
+            <rect class="d-good" x="376" y="240" width="344" height="40" rx="8"/>
+            <text class="d-tg" x="548" y="265" text-anchor="middle">항상 likeCount = 1 · 같은 요청 재시도도 안전</text>
+            <text class="d-s" x="376" y="304">락은 동시 요청을 막고, 멱등 API는 재시도를 안전하게 만든다.</text>
+            <text class="d-s" x="376" y="320">둘 중 하나만으로는 완전하지 않아 함께 적용</text>
+          </svg>
+        </div>
+      </figure>
+
+      <div class="psr">
+        <div>
+          <p class="label">문제 원인</p>
+          <ul>
+            <li>"좋아요 존재 여부 확인 → INSERT/DELETE" 사이에 경합이 있어, 같은 사용자의 <b>동시 요청 5개만으로 unique 제약 위반 500</b>이 재현됐습니다.</li>
+            <li>토글(현재 상태 반전) API는 멱등하지 않아, 응답이 늦어 사용자가 재시도하면 두 번째 요청이 첫 요청이 추가한 좋아요를 삭제했습니다.</li>
+            <li>클라이언트의 재조회·지연 재확인 같은 타이밍 기반 완화는 서버 처리가 길어지면 다시 잘못된 재시도를 유도했고, Codex 코드 리뷰에서도 같은 결함이 반복 지적됐습니다.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="label">해결 과정</p>
+          <ul>
+            <li>좋아요 삽입을 <code>REQUIRES_NEW</code>로 분리하던 방식을 걷어내고 같은 트랜잭션에서 처리해, 요청이 실패해도 절반만 반영된 상태가 남지 않게 했습니다.</li>
+            <li><code>UserRepository.findByIdForUpdate()</code>로 요청 사용자 행에 비관적 락을 걸어 같은 사용자의 좋아요 요청을 직렬화했습니다. 상점 구매·보상 회수에서 쓰던 패턴과 맞췄습니다.</li>
+            <li>POST 토글을 <code>PUT /like {"liked": true|false}</code> "원하는 최종 상태 지정" API로 재설계하고, <code>setLiked()</code>는 현재 상태와 같으면 아무것도 하지 않도록 했습니다.</li>
+            <li>실제 Postgres에 동시 요청을 라운드 단위로 반복 전송해 검증하고, 멱등성 통합 테스트를 추가했습니다.</li>
+          </ul>
+        </div>
+        <div class="result">
+          <p class="label">결과</p>
+          <ul>
+            <li>락 도입 후 동일 세션 <b>10개 동시 요청 × 5라운드(50건) 전부 200 성공</b></li>
+            <li>같은 <code>liked=true</code>를 10개 동시 × 3라운드 보내도 <b>likeCount가 항상 1로 수렴</b></li>
+            <li>재시도가 항상 안전해져 프론트의 재조회·지연 재확인 헬퍼를 삭제하고 클라이언트 로직을 단순화</li>
+          </ul>
+        </div>
       </div>
     </article>
 
-    <article class="project">
-      <div class="p-head">
-        <h3>LinkZip</h3>
-        <span class="period">2024.07 – 2024.08</span>
-      </div>
-      <p class="p-meta"><span class="badge">UMC 6기 데모데이 대상</span>URL 요약·아카이빙 서비스 · 백엔드 리드 (BE 5명)</p>
-      <p class="p-summary">링크를 저장해도 나중에 무슨 내용이었는지 알 수 없는 문제를, 저장 시 LLM이 핵심 내용을 요약해 함께 보여주는 기능으로 풀었습니다.</p>
-      <ul class="items">
-        <li>
-          <h4>URL을 직접 읽지 못하는 LLM → 메타 정보 추출 후 전달</h4>
-          <p>API로 제공되는 GPT 모델이 URL을 직접 조회하지 못해, 주소에서 HTML 제목·설명 등 메타 정보를 먼저 추출하고 프롬프트와 함께 전달하는 구조로 바꿨습니다. 비동기 처리, 오류 처리, Rate Limit 관리까지 포함해 <em>핵심 기능을 기한 안에 완성</em>했습니다.</p>
-        </li>
-        <li>
-          <h4>백엔드 리드로 전 과정 주도</h4>
-          <p>Express 아키텍처와 MySQL 스키마(링크 메타데이터·요약본·알림·폴더)를 설계하고 AWS 인프라와 배포를 맡았습니다. 마감 직전 프론트와의 요청/응답 양식 불일치는 기능 담당자별로 필요한 데이터를 취합해 맞췄고, 주간 코드 리뷰를 이끌었습니다.</p>
-        </li>
-      </ul>
-      <div class="p-foot">
-        <div class="tags"><span>JavaScript</span><span>Express.js</span><span>MySQL</span><span>Redis</span><span>OpenAI API</span><span>AWS EC2·RDS·S3·VPC</span><span>PM2</span></div>
-        <div class="p-links"><a href="https://github.com/Seonwu-K/Link-zip-BE" target="_blank" rel="noopener">GitHub ↗</a><a href="https://linkzip.qshop.ai/" target="_blank" rel="noopener">랜딩 페이지 ↗</a></div>
+    <!-- 02 -->
+    <article class="case" id="case-dialect">
+      <div class="case-top"><span class="case-no">02</span><span class="proj">Layer Archive</span><span>배포 장애 대응 · 2026.07</span></div>
+      <h3>H2에서만 통과하던 JPQL 타입 추론 차이를 배포 로그로 추적해 수정하고, Testcontainers Postgres 통합 테스트로 재발 방지</h3>
+
+      <figure>
+        <p class="label">테스트 환경과 배포 환경 (변경 전 / 후)</p>
+        <div class="fig">
+          <svg viewBox="0 0 720 300" role="img" aria-labelledby="f2t">
+            <title id="f2t">변경 전에는 H2 테스트는 통과하고 배포 Postgres에서 lower(bytea) 오류로 500이 났고, 변경 후에는 파라미터를 빈 문자열로 고정하고 방언에 민감한 테스트를 Testcontainers Postgres에서 실행한다</title>
+            <defs>
+              <marker id="m2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0L10 5L0 10z"/></marker>
+              <marker id="m2b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah-bad" d="M0 0L10 5L0 10z"/></marker>
+              <marker id="m2g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah-good" d="M0 0L10 5L0 10z"/></marker>
+            </defs>
+            <text class="d-h" x="0" y="14">BEFORE</text>
+            <rect class="d-box" x="0" y="28" width="190" height="52" rx="8"/>
+            <text class="d-t" x="95" y="50" text-anchor="middle">GalleryService</text>
+            <text class="d-s" x="95" y="68" text-anchor="middle">검색어 없음 → search = null</text>
+            <path class="d-line" d="M190 54H232" marker-end="url(#m2)"/>
+            <rect class="d-box" x="236" y="28" width="220" height="52" rx="8"/>
+            <text class="d-t" x="346" y="50" text-anchor="middle">GalleryPostRepository (JPQL)</text>
+            <text class="d-s d-mono" x="346" y="68" text-anchor="middle">:search is null or lower(…)</text>
+            <path class="d-line-good" d="M456 44C490 44 490 36 520 36" marker-end="url(#m2g)"/>
+            <path class="d-line-bad" d="M456 64C490 64 490 74 520 74" marker-end="url(#m2b)"/>
+            <rect class="d-good" x="524" y="20" width="196" height="32" rx="8"/>
+            <text class="d-tg" x="622" y="41" text-anchor="middle">로컬·CI (H2) · 79개+ 통과</text>
+            <rect class="d-bad" x="524" y="58" width="196" height="32" rx="8"/>
+            <text class="d-tb" x="622" y="79" text-anchor="middle">배포 (Postgres) · 항상 500</text>
+            <text class="d-tb" x="236" y="112">Postgres: null 파라미터 타입을 bytea로 추론 →</text>
+            <text class="d-s d-mono" x="236" y="130">ERROR: function lower(bytea) does not exist</text>
+
+            <line x1="0" y1="148" x2="720" y2="148" class="d-dash"/>
+
+            <text class="d-h" x="0" y="176">AFTER</text>
+            <rect class="d-hl" x="0" y="190" width="190" height="52" rx="8"/>
+            <text class="d-t" x="95" y="212" text-anchor="middle">normalizeSearch()</text>
+            <text class="d-s" x="95" y="230" text-anchor="middle">null 대신 "" 반환</text>
+            <path class="d-line" d="M190 216H232" marker-end="url(#m2)"/>
+            <rect class="d-hl" x="236" y="190" width="220" height="52" rx="8"/>
+            <text class="d-t" x="346" y="212" text-anchor="middle">JPQL 고정 타입 비교</text>
+            <text class="d-s d-mono" x="346" y="230" text-anchor="middle">:search = '' or lower(…)</text>
+            <path class="d-line-good" d="M456 206C490 206 490 198 520 198" marker-end="url(#m2g)"/>
+            <rect class="d-good" x="524" y="182" width="196" height="32" rx="8"/>
+            <text class="d-tg" x="622" y="203" text-anchor="middle">배포 (Postgres) · 정상 조회</text>
+            <rect class="d-hl" x="524" y="222" width="196" height="46" rx="8"/>
+            <text class="d-t" x="622" y="241" text-anchor="middle">CI · Testcontainers Postgres</text>
+            <text class="d-s" x="622" y="258" text-anchor="middle">방언에 민감한 테스트만 실제 DB로</text>
+            <path class="d-line" d="M456 230C490 230 490 245 520 245" marker-end="url(#m2)"/>
+            <text class="d-s" x="0" y="290">나머지 테스트는 빠른 H2를 유지해 피드백 속도와 탐지력을 함께 확보</text>
+          </svg>
+        </div>
+      </figure>
+
+      <div class="psr">
+        <div>
+          <p class="label">문제 원인</p>
+          <ul>
+            <li>배포 환경에서만 <code>GET /api/gallery</code>, <code>GET /api/archives</code>가 항상 500을 반환했습니다. 로컬(H2)에서는 재현되지 않았고 테스트 79개 이상이 모두 통과한 상태였습니다.</li>
+            <li>서버 로그의 스택트레이스에서 <code>ERROR: function lower(bytea) does not exist</code>를 확인했습니다.</li>
+            <li>검색어가 없을 때 <code>null</code>이 전달되고, JPQL <code>:search is null or lower(title) like …</code>에서 <b>Postgres가 파라미터 타입을 bytea로 잘못 추론</b>했습니다. H2는 이 추론에 관대해 테스트가 구조적으로 잡을 수 없었습니다.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="label">해결 과정</p>
+          <ul>
+            <li>서비스 계층 <code>normalizeSearch()</code>가 <code>null</code> 대신 빈 문자열을 반환하도록 바꿨습니다.</li>
+            <li>쿼리 조건을 <code>:search = ''</code> 고정 타입 비교로 바꿔 파라미터가 항상 문자열로 바인딩되게 했습니다.</li>
+            <li>방언에 민감한 리포지토리 테스트만 Testcontainers Postgres로 전환했습니다(<code>AbstractPostgresIntegrationTest</code> + <code>@ServiceConnection</code>). 나머지는 빠른 H2를 유지했습니다.</li>
+          </ul>
+        </div>
+        <div class="result">
+          <p class="label">결과</p>
+          <ul>
+            <li>배포 환경의 <b>갤러리·아카이브 목록 조회 장애 해소</b></li>
+            <li>같은 유형의 방언 차이 버그를 사용자에게 노출되기 전 <b>머지 전 CI에서 잡는 구조</b> 확보</li>
+            <li>검색·필터 JPQL을 추가할 때 방언 민감도를 먼저 판단하는 기준을 ADR로 문서화</li>
+          </ul>
+        </div>
       </div>
     </article>
 
-    <article class="project">
-      <div class="p-head">
-        <h3>IT 기술 뉴스 RAG 챗봇</h3>
-        <span class="period">2025.03 – 2025.06</span>
-      </div>
-      <p class="p-meta"><span class="badge">졸업 캡스톤 · 논문</span>뉴스 기반 QA 챗봇 · 개인 개발</p>
-      <p class="p-summary">단순 프롬프팅으로는 기사에 없는 내용을 지어내는 문제가 있었고, 자체 모델을 학습시킬 자원은 없었습니다. 학습이 필요 없는 RAG를 적용하고, 효과를 직접 설계한 평가로 검증했습니다.</p>
-      <ul class="items">
-        <li>
-          <h4>RAG 파이프라인 구축</h4>
-          <p>IT 뉴스 3,385건을 크롤링·전처리해 Upstage 임베딩으로 ChromaDB에 저장하고, 질문과 관련된 기사를 근거로 Solar LLM이 답하도록 LangChain 파이프라인을 구성했습니다.</p>
-        </li>
-        <li>
-          <h4>정량 평가 설계와 검증</h4>
-          <p>정확도·관련성·환각률 지표와 테스트 데이터셋을 직접 설계해 RAG 적용 전후를 측정했습니다. <em>정확도 82% → 93%, 관련성 85% → 95%, 환각률 46.7% → 8.5%</em>. 프롬프팅 기법 4종을 모듈화해 비교한 결과, 상황에 따라 최적 전략이 달라진다는 결론을 졸업논문으로 발표했습니다.</p>
-        </li>
-      </ul>
-      <div class="p-foot">
-        <div class="tags"><span>Python</span><span>LangChain</span><span>LangSmith</span><span>ChromaDB</span><span>Solar LLM</span><span>Streamlit</span></div>
-        <div class="p-links"><a href="https://github.com/Seonwu-K/RAG-news-chatbot" target="_blank" rel="noopener">GitHub ↗</a></div>
+    <!-- 03 -->
+    <article class="case" id="case-latency">
+      <div class="case-top"><span class="case-no">03</span><span class="proj">Layer Archive</span><span>성능 진단 · 2026.07 – 2026.09</span></div>
+      <h3>API 기본 응답 0.44초의 원인을 경로별 구간 측정으로 좁히고, 틀린 첫 가설을 재측정으로 반증해 설정 한 줄로 해결</h3>
+
+      <figure>
+        <p class="label">요청 경로와 구간별 측정</p>
+        <div class="fig">
+          <svg viewBox="0 0 720 280" role="img" aria-labelledby="f3t">
+            <title id="f3t">Vercel 프록시를 거치면 함수가 워싱턴 리전에서 실행돼 0.44초, 백엔드를 직접 호출하면 0.04초였고, 함수 리전을 서울로 바꾸자 0.07에서 0.11초가 되었다</title>
+            <defs>
+              <marker id="m3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0L10 5L0 10z"/></marker>
+              <marker id="m3b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah-bad" d="M0 0L10 5L0 10z"/></marker>
+              <marker id="m3g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah-good" d="M0 0L10 5L0 10z"/></marker>
+            </defs>
+            <text class="d-h" x="0" y="14">① 프록시 경유 · www.layerarchive.work/api/health</text>
+            <rect class="d-box" x="0" y="26" width="110" height="44" rx="8"/><text class="d-t" x="55" y="53" text-anchor="middle">브라우저</text>
+            <path class="d-line-bad" d="M110 48H176" marker-end="url(#m3b)"/>
+            <rect class="d-bad" x="180" y="26" width="190" height="44" rx="8"/><text class="d-t" x="275" y="45" text-anchor="middle">Vercel 함수 (프록시)</text><text class="d-tb" x="275" y="61" text-anchor="middle">기본 리전 iad1 · 워싱턴 DC</text>
+            <path class="d-line-bad" d="M370 48H436" marker-end="url(#m3b)"/>
+            <text class="d-m" x="403" y="40" text-anchor="middle">태평양 왕복</text>
+            <rect class="d-box" x="440" y="26" width="150" height="44" rx="8"/><text class="d-t" x="515" y="45" text-anchor="middle">nginx → EC2</text><text class="d-s" x="515" y="61" text-anchor="middle">서울 · Spring Boot</text>
+            <rect class="d-bad" x="610" y="30" width="110" height="36" rx="8"/><text class="d-tb" x="665" y="53" text-anchor="middle">0.44초</text>
+
+            <text class="d-h" x="0" y="104">② 백엔드 직접 호출 · api.layerarchive.work/api/health</text>
+            <rect class="d-box" x="0" y="116" width="110" height="44" rx="8"/><text class="d-t" x="55" y="143" text-anchor="middle">브라우저</text>
+            <path class="d-line" d="M110 138H436" marker-end="url(#m3)"/>
+            <text class="d-m" x="273" y="130" text-anchor="middle">Vercel 구간을 건너뛰어 같은 백엔드를 측정</text>
+            <rect class="d-box" x="440" y="116" width="150" height="44" rx="8"/><text class="d-t" x="515" y="135" text-anchor="middle">nginx → EC2</text><text class="d-s" x="515" y="151" text-anchor="middle">서울 · Spring Boot</text>
+            <rect class="d-hl" x="610" y="120" width="110" height="36" rx="8"/><text class="d-ta" x="665" y="143" text-anchor="middle">0.04초</text>
+
+            <line x1="0" y1="180" x2="720" y2="180" class="d-dash"/>
+
+            <text class="d-h" x="0" y="206">③ 조치 후 · vercel.json "regions": ["icn1"]</text>
+            <rect class="d-box" x="0" y="218" width="110" height="44" rx="8"/><text class="d-t" x="55" y="245" text-anchor="middle">브라우저</text>
+            <path class="d-line-good" d="M110 240H176" marker-end="url(#m3g)"/>
+            <rect class="d-good" x="180" y="218" width="190" height="44" rx="8"/><text class="d-t" x="275" y="237" text-anchor="middle">Vercel 함수 (프록시)</text><text class="d-tg" x="275" y="253" text-anchor="middle">icn1 · 서울</text>
+            <path class="d-line-good" d="M370 240H436" marker-end="url(#m3g)"/>
+            <rect class="d-box" x="440" y="218" width="150" height="44" rx="8"/><text class="d-t" x="515" y="237" text-anchor="middle">nginx → EC2</text><text class="d-s" x="515" y="253" text-anchor="middle">서울 · Spring Boot</text>
+            <rect class="d-good" x="610" y="222" width="110" height="36" rx="8"/><text class="d-tg" x="665" y="245" text-anchor="middle">0.07~0.11초</text>
+          </svg>
+        </div>
+      </figure>
+
+      <div class="psr">
+        <div>
+          <p class="label">문제 원인</p>
+          <ul>
+            <li>DB를 전혀 쓰지 않는 헬스체크조차 0.4~0.5초가 걸려, 애플리케이션 로직이 아니라 <b>네트워크 구간의 고정 비용</b>으로 판단했습니다.</li>
+            <li>첫 가설(백엔드가 미국 리전에 있어서 느리다)에 따라 백엔드를 서울 EC2로 옮겼지만, 재측정해 보니 지연이 그대로였습니다.</li>
+            <li>같은 백엔드를 두 경로로 호출해 구간을 가르자 프록시 경유 0.44초, 직접 호출 0.04초였습니다. <b>Vercel 함수가 기본 리전 iad1(워싱턴 DC)에서 실행</b>돼 매 요청이 태평양을 왕복하고 있었습니다.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="label">해결 과정</p>
+          <ul>
+            <li>DB 미사용 헬스체크 → 경로별 측정 순서로 병목 구간을 Vercel 함수 구간까지 좁혔습니다.</li>
+            <li>백엔드만 서울로 옮기면서 오히려 함수와 백엔드 사이 왕복이 늘었다는 점을 확인하고, <code>frontend/vercel.json</code>에 <code>"regions": ["icn1"]</code>를 지정했습니다.</li>
+            <li>조치 전과 같은 경로를 다시 측정해 개선을 확인했습니다.</li>
+          </ul>
+        </div>
+        <div class="result">
+          <p class="label">결과</p>
+          <ul>
+            <li><code>/api/health</code>(프록시 경유) <b>0.44초 → 0.07~0.11초</b></li>
+            <li><code>/api/gallery</code>(DB 조회 포함) 0.46~0.48초 → 0.10~0.19초, <b>요청당 약 0.35초 · 4~5배 개선</b></li>
+            <li>코드 변경 없이 설정 한 줄로 해결. 인프라 이전을 끝으로 보지 않고 재측정으로 가설을 검증</li>
+          </ul>
+        </div>
       </div>
     </article>
 
-    <article class="project">
-      <div class="p-head">
-        <h3>MoMogum</h3>
-        <span class="period">2025.01 – 2025.02</span>
+    <!-- 04 -->
+    <article class="case" id="case-linkzip">
+      <div class="case-top"><span class="case-no">04</span><span class="proj">LinkZip</span><span>UMC 6기 데모데이 대상 · 백엔드 리드 · 2024.07 – 2024.08</span></div>
+      <h3>URL을 직접 읽지 못하는 GPT API의 한계를 서버 측 HTML 정보 추출로 보완해 링크 요약 핵심 기능 완성</h3>
+
+      <figure>
+        <p class="label">링크 저장 시퀀스 다이어그램</p>
+        <div class="fig">
+          <svg viewBox="0 0 720 330" role="img" aria-labelledby="f4t">
+            <title id="f4t">클라이언트가 링크 저장을 요청하면 Express 서버가 대상 페이지 HTML을 받아 제목, 설명, 본문 일부를 추출하고, 이를 OpenAI API에 보내 요약을 받은 뒤 MySQL에 저장하고 응답한다</title>
+            <defs>
+              <marker id="m4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0L10 5L0 10z"/></marker>
+            </defs>
+            <rect class="d-box" x="10" y="0" width="112" height="36" rx="8"/><text class="d-t" x="66" y="23" text-anchor="middle">Client</text>
+            <rect class="d-hl" x="158" y="0" width="128" height="36" rx="8"/><text class="d-t" x="222" y="23" text-anchor="middle">Express 서버</text>
+            <rect class="d-box" x="322" y="0" width="128" height="36" rx="8"/><text class="d-t" x="386" y="23" text-anchor="middle">대상 웹페이지</text>
+            <rect class="d-box" x="468" y="0" width="112" height="36" rx="8"/><text class="d-t" x="524" y="23" text-anchor="middle">OpenAI API</text>
+            <rect class="d-box" x="598" y="0" width="112" height="36" rx="8"/><text class="d-t" x="654" y="23" text-anchor="middle">MySQL</text>
+            <line class="d-dash" x1="66" y1="36" x2="66" y2="326"/><line class="d-dash" x1="222" y1="36" x2="222" y2="326"/><line class="d-dash" x1="386" y1="36" x2="386" y2="326"/><line class="d-dash" x1="524" y1="36" x2="524" y2="326"/><line class="d-dash" x1="654" y1="36" x2="654" y2="326"/>
+
+            <path class="d-line" d="M66 66H218" marker-end="url(#m4)"/><text class="d-s" x="142" y="58" text-anchor="middle">1. 링크 저장 (URL)</text>
+            <path class="d-line" d="M222 100H382" marker-end="url(#m4)"/><text class="d-s" x="304" y="92" text-anchor="middle">2. axios GET (https 실패 시 http)</text>
+            <path class="d-line" d="M386 130H226" marker-end="url(#m4)"/><text class="d-s" x="304" y="122" text-anchor="middle">3. HTML</text>
+            <rect class="d-hl" x="232" y="144" width="226" height="48" rx="8"/>
+            <text class="d-t" x="345" y="164" text-anchor="middle">4. cheerio로 요약 재료 추출</text>
+            <text class="d-s" x="345" y="181" text-anchor="middle">title · meta description · h1 · 첫 문단</text>
+            <path class="d-line" d="M222 218H520" marker-end="url(#m4)"/><text class="d-s" x="371" y="210" text-anchor="middle">5. 추출 텍스트 + 프롬프트 (gpt-3.5-turbo)</text>
+            <path class="d-line" d="M524 246H226" marker-end="url(#m4)"/><text class="d-s" x="373" y="238" text-anchor="middle">6. 링크 요약</text>
+            <path class="d-line" d="M222 274H650" marker-end="url(#m4)"/><text class="d-s" x="436" y="266" text-anchor="middle">7. 링크 메타데이터 + 요약 저장</text>
+            <path class="d-line" d="M222 306H70" marker-end="url(#m4)"/><text class="d-s" x="146" y="298" text-anchor="middle">8. 요약 포함 응답</text>
+          </svg>
+        </div>
+        <figcaption>YouTube 링크는 영상 요약 API 결과를 받아 GPT로 한국어 요약하도록 분기했습니다.</figcaption>
+      </figure>
+
+      <div class="psr">
+        <div>
+          <p class="label">문제 원인</p>
+          <ul>
+            <li>링크만 모아 두면 나중에 무슨 내용인지 알 수 없어 다시 열어 봐야 했고, 그래서 <b>저장할 때 요약을 함께 보여주는 것</b>이 서비스의 핵심 기능이었습니다.</li>
+            <li>당시 API로 쓸 수 있던 GPT 모델은 URL을 전달해도 <b>페이지를 직접 열어 읽지 못했습니다.</b></li>
+            <li>팀 안에서 "구현이 어려우면 빼도 된다"는 의견이 나왔지만, 이 기능이 빠지면 단순 링크 보관 서비스만 남는 상황이었습니다.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="label">해결 과정</p>
+          <ul>
+            <li>AI에 주소를 넘기는 대신 서버가 먼저 페이지를 받아오도록 구조를 바꿨습니다. axios로 HTML을 받고 cheerio로 title · meta description · 첫 h1 · 첫 문단을 추출했습니다.</li>
+            <li>추출한 텍스트를 프롬프트와 함께 OpenAI API에 전달해 요약을 받고, 링크 메타데이터와 함께 MySQL에 저장했습니다.</li>
+            <li>https 요청이 실패하면 http로 재시도하고, YouTube 링크는 영상 요약 API 결과를 GPT로 한국어 정리하도록 분기했습니다.</li>
+          </ul>
+        </div>
+        <div class="result">
+          <p class="label">결과</p>
+          <ul>
+            <li>포기할 뻔한 <b>핵심 기능을 마감 안에 완성</b></li>
+            <li>UMC 6기 데모데이 <b>약 60개 팀 중 대상(1위)</b></li>
+            <li>백엔드 리드로 Express 아키텍처 · MySQL 스키마 · AWS 배포까지 전 과정 주도</li>
+          </ul>
+        </div>
       </div>
-      <p class="p-meta"><span class="badge">UMC 7기 데모데이</span>식사 약속·리뷰 SNS (iOS) · 백엔드 (BE 5명)</p>
-      <p class="p-summary">데모 프로젝트였지만 실제 서비스 수준의 인증과 배포 체계를 목표로 설계했습니다.</p>
-      <ul class="items">
-        <li>
-          <h4>확장 가능한 무상태 인증</h4>
-          <p>서버 확장과 DB 부하를 고려해 JWT 기반 무상태 인증을 채택하고, Refresh Token은 Redis에 TTL과 함께 저장했습니다. Spring Security 필터 체인으로 인가를 처리하고 OAuth2(Kakao) 소셜 로그인을 연동했습니다.</p>
-        </li>
-        <li>
-          <h4>자동 롤백되는 배포 파이프라인</h4>
-          <p>GitHub Actions로 빌드한 Docker 이미지를 AWS CodeDeploy로 EC2에 배포하고, 배포 중 문제가 생기면 이전 버전으로 자동 롤백되도록 구성해 <em>데모 기간 배포로 인한 서비스 중단 없이</em> 시연을 마쳤습니다.</p>
-        </li>
-      </ul>
-      <div class="p-foot">
-        <div class="tags"><span>Java</span><span>Spring Boot</span><span>Spring Security</span><span>Redis</span><span>Docker</span><span>GitHub Actions</span><span>AWS CodeDeploy</span></div>
-        <div class="p-links"><a href="https://github.com/Seonwu-K/momogum_BE" target="_blank" rel="noopener">GitHub ↗</a></div>
+    </article>
+
+    <!-- 05 -->
+    <article class="case" id="case-rag">
+      <div class="case-top"><span class="case-no">05</span><span class="proj">IT 뉴스 RAG 챗봇</span><span>졸업 캡스톤 · 개인 개발 · 2025.03 – 2025.06</span></div>
+      <h3>단순 프롬프팅의 할루시네이션을 학습이 필요 없는 RAG로 줄이고, 평가 지표와 테스트셋을 직접 설계해 효과를 정량 검증</h3>
+
+      <figure>
+        <p class="label">데이터 흐름</p>
+        <div class="fig">
+          <svg viewBox="0 0 720 250" role="img" aria-labelledby="f5t">
+            <title id="f5t">뉴스 3385건을 크롤링하고 전처리해 Upstage 임베딩으로 ChromaDB에 저장한다. 질문이 들어오면 관련 기사를 검색해 프롬프트 템플릿과 함께 Solar LLM에 전달하고, 답변을 정확도 관련성 환각률로 평가한다</title>
+            <defs>
+              <marker id="m5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="ah" d="M0 0L10 5L0 10z"/></marker>
+            </defs>
+            <text class="d-h" x="0" y="14">색인 · 사전 준비</text>
+            <rect class="d-box" x="0" y="26" width="150" height="48" rx="8"/><text class="d-t" x="75" y="46" text-anchor="middle">IT 뉴스 크롤링</text><text class="d-s" x="75" y="63" text-anchor="middle">3,385건 · BeautifulSoup</text>
+            <path class="d-line" d="M150 50H186" marker-end="url(#m5)"/>
+            <rect class="d-box" x="190" y="26" width="140" height="48" rx="8"/><text class="d-t" x="260" y="55" text-anchor="middle">전처리</text>
+            <path class="d-line" d="M330 50H366" marker-end="url(#m5)"/>
+            <rect class="d-box" x="370" y="26" width="150" height="48" rx="8"/><text class="d-t" x="445" y="55" text-anchor="middle">Upstage 임베딩</text>
+            <path class="d-line" d="M520 50H556" marker-end="url(#m5)"/>
+            <rect class="d-hl" x="560" y="26" width="160" height="48" rx="8"/><text class="d-t" x="640" y="46" text-anchor="middle">ChromaDB</text><text class="d-s" x="640" y="63" text-anchor="middle">벡터 저장소</text>
+
+            <line x1="0" y1="100" x2="720" y2="100" class="d-dash"/>
+            <text class="d-h" x="0" y="124">질의 · LangChain 파이프라인</text>
+            <rect class="d-box" x="0" y="138" width="110" height="48" rx="8"/><text class="d-t" x="55" y="167" text-anchor="middle">사용자 질문</text>
+            <path class="d-line" d="M110 162H146" marker-end="url(#m5)"/>
+            <rect class="d-hl" x="150" y="138" width="150" height="48" rx="8"/><text class="d-t" x="225" y="158" text-anchor="middle">관련 기사 검색</text><text class="d-s" x="225" y="175" text-anchor="middle">근거 문서 확보</text>
+            <path class="d-line" d="M640 74V130H225V134" marker-end="url(#m5)"/>
+            <text class="d-m" x="440" y="124" text-anchor="middle">벡터 유사도 검색</text>
+            <path class="d-line" d="M300 162H336" marker-end="url(#m5)"/>
+            <rect class="d-box" x="340" y="138" width="130" height="48" rx="8"/><text class="d-t" x="405" y="158" text-anchor="middle">프롬프트 템플릿</text><text class="d-s" x="405" y="175" text-anchor="middle">기법 4종 모듈화</text>
+            <path class="d-line" d="M470 162H506" marker-end="url(#m5)"/>
+            <rect class="d-box" x="510" y="138" width="90" height="48" rx="8"/><text class="d-t" x="555" y="167" text-anchor="middle">Solar LLM</text>
+            <path class="d-line" d="M600 162H636" marker-end="url(#m5)"/>
+            <rect class="d-box" x="640" y="138" width="80" height="48" rx="8"/><text class="d-t" x="680" y="167" text-anchor="middle">답변</text>
+            <path class="d-line" d="M680 186V204" marker-end="url(#m5)"/>
+            <rect class="d-good" x="340" y="208" width="380" height="36" rx="8"/>
+            <text class="d-tg" x="530" y="231" text-anchor="middle">평가 · 정확도 · 관련성 · 환각률 (RAG 적용 전후 비교)</text>
+          </svg>
+        </div>
+      </figure>
+
+      <div class="psr">
+        <div>
+          <p class="label">문제 원인</p>
+          <ul>
+            <li>뉴스 기반 질의응답에서 단순 AI 프롬프팅은 그럴듯하지만 <b>기사에 없는 내용을 지어내는 할루시네이션</b>을 보였습니다.</li>
+            <li>자체 모델 학습은 인적·시간 자원이 부족해 현실적인 선택지가 아니었습니다.</li>
+            <li>개선했다고 말하려면 "좋아진 것 같다"가 아니라 <b>객관적으로 비교할 평가 기준</b>이 필요했습니다.</li>
+          </ul>
+        </div>
+        <div>
+          <p class="label">해결 과정</p>
+          <ul>
+            <li>IT 뉴스 3,385건을 크롤링·전처리하고 Upstage 임베딩으로 ChromaDB에 저장했습니다.</li>
+            <li>질문과 관련된 기사를 먼저 검색해 근거로 함께 전달하는 RAG 파이프라인을 LangChain으로 구성하고, Solar LLM으로 답변을 생성했습니다.</li>
+            <li>정확도·관련성·환각률 지표와 논문 평가용 테스트 데이터셋을 직접 설계하고, 프롬프팅 기법 4종을 템플릿으로 모듈화해 함께 비교했습니다.</li>
+          </ul>
+        </div>
+        <div class="result">
+          <p class="label">결과</p>
+          <ul>
+            <li>RAG 적용 전후 <b>정확도 82% → 93%, 관련성 85% → 95%, 환각률 46.7% → 8.5%</b></li>
+            <li>프롬프팅 기법 비교에서는 요약 간결성·정확성·정보 풍부함 등 상황에 따라 최적 전략이 달라진다는 결론 도출</li>
+            <li>졸업논문으로 발표하고 캡스톤 최종 통과</li>
+          </ul>
+        </div>
       </div>
     </article>
   </section>
 
+  <section id="projects" aria-labelledby="projects-title">
+    <div class="sec-head">
+      <h2 id="projects-title">Projects</h2>
+      <p>위 사례가 나온 프로젝트와 그 밖의 작업입니다.</p>
+    </div>
+    <div class="projects">
+      <article class="pcard">
+        <h3>Layer Archive</h3>
+        <div class="pmeta">2026.05 – 현재 · 개인 개발 · 실서비스 운영 중</div>
+        <p>일러스트 강사의 의뢰로 만든 그림 수업 관리 시스템(LMS) 겸 게임화 커뮤니티</p>
+        <ul>
+          <li>사례 <a href="#case-like">01</a> · <a href="#case-dialect">02</a> · <a href="#case-latency">03</a></li>
+          <li>익명 문의 창구로 불편 사항을 모아 로그인 간소화, 한글 UI 개편 등 실제 요청부터 반영</li>
+          <li>Codex·Claude Code가 같은 규칙 원본을 읽도록 로드 시점별로 구조를 재편, 매 세션 강제로 읽던 101KB 중 83KB를 차지하던 메모리 파일을 3.2KB 인덱스로 축소</li>
+        </ul>
+        <div class="tags"><span>Java 21</span><span>Spring Boot 3.4</span><span>PostgreSQL</span><span>Testcontainers</span><span>Next.js 15</span><span>AWS EC2</span><span>nginx</span></div>
+        <div class="plinks"><a href="https://www.layerarchive.work" target="_blank" rel="noopener">서비스 ↗</a></div>
+      </article>
+      <article class="pcard">
+        <h3>LinkZip</h3>
+        <div class="pmeta">2024.07 – 2024.08 · 백엔드 리드 (BE 5명) · UMC 6기 대상</div>
+        <p>링크를 저장하면 LLM이 핵심 내용을 요약해 함께 보여주는 URL 아카이빙 서비스</p>
+        <ul>
+          <li>사례 <a href="#case-linkzip">04</a></li>
+          <li>Express 아키텍처와 MySQL 스키마 설계, AWS 인프라 구축과 배포, 주간 코드 리뷰 주도</li>
+        </ul>
+        <div class="tags"><span>Express.js</span><span>MySQL</span><span>Redis</span><span>OpenAI API</span><span>AWS EC2·RDS·S3</span><span>PM2</span></div>
+        <div class="plinks"><a href="https://github.com/Seonwu-K/Link-zip-BE" target="_blank" rel="noopener">GitHub ↗</a><a href="https://linkzip.qshop.ai/" target="_blank" rel="noopener">랜딩 페이지 ↗</a></div>
+      </article>
+      <article class="pcard">
+        <h3>IT 뉴스 RAG 챗봇</h3>
+        <div class="pmeta">2025.03 – 2025.06 · 개인 개발 · 졸업 캡스톤</div>
+        <p>LangChain 기반으로 벡터 DB, LLM, 웹 UI를 구성한 뉴스 질의응답 챗봇과 졸업논문</p>
+        <ul>
+          <li>사례 <a href="#case-rag">05</a></li>
+          <li>졸업논문 "LangChain을 활용한 뉴스 QA RAG 설계 및 프롬프트 기법 분석"</li>
+        </ul>
+        <div class="tags"><span>Python</span><span>LangChain</span><span>LangSmith</span><span>ChromaDB</span><span>Solar LLM</span><span>Streamlit</span></div>
+        <div class="plinks"><a href="https://github.com/Seonwu-K/RAG-news-chatbot" target="_blank" rel="noopener">GitHub ↗</a></div>
+      </article>
+      <article class="pcard">
+        <h3>MoMogum</h3>
+        <div class="pmeta">2025.01 – 2025.02 · 백엔드 (BE 5명) · UMC 7기 데모데이</div>
+        <p>식당 리뷰와 팔로워 간 식사 약속을 지원하는 iOS SNS</p>
+        <ul>
+          <li>서버 확장을 고려해 JWT 무상태 인증 채택, Refresh Token은 Redis에 TTL로 관리, Spring Security 필터 체인과 OAuth2(Kakao) 로그인 연동</li>
+          <li>GitHub Actions → Docker → AWS CodeDeploy 배포, 실패 시 이전 버전으로 자동 롤백되도록 구성</li>
+        </ul>
+        <div class="tags"><span>Java</span><span>Spring Boot</span><span>Spring Security</span><span>Redis</span><span>Docker</span><span>GitHub Actions</span></div>
+        <div class="plinks"><a href="https://github.com/Seonwu-K/momogum_BE" target="_blank" rel="noopener">GitHub ↗</a></div>
+      </article>
+    </div>
+  </section>
+
   <section id="experience" aria-labelledby="experience-title">
-    <h2 class="sec" id="experience-title">Experience &amp; Education</h2>
+    <div class="sec-head"><h2 id="experience-title">Experience &amp; Education</h2></div>
     <div class="grid2">
       <div class="card">
         <h3>Experience</h3>
@@ -326,7 +683,6 @@
           <li>
             <b>인하대학교 정보통신공학 학사</b>
             <span>2019.03 – 2026.02</span>
-            <p>졸업논문 "LangChain을 활용한 뉴스 QA RAG 설계 및 프롬프트 기법 분석"</p>
           </li>
         </ul>
       </div>
@@ -334,18 +690,19 @@
   </section>
 
   <section id="skills" aria-labelledby="skills-title">
-    <h2 class="sec" id="skills-title">Skills</h2>
+    <div class="sec-head"><h2 id="skills-title">Skills</h2></div>
     <dl class="skills">
-      <div><dt>Backend</dt><dd>Java, Spring Boot, Spring Security · TypeScript, NestJS, Express.js</dd></div>
+      <div><dt>Backend</dt><dd>Java, Spring Boot, Spring Security, JPA · TypeScript, NestJS, Express.js</dd></div>
       <div><dt>Frontend</dt><dd>Next.js, React</dd></div>
-      <div><dt>Data</dt><dd>MySQL, PostgreSQL, Redis, ChromaDB</dd></div>
-      <div><dt>Infra</dt><dd>AWS (EC2, RDS, S3, VPC), Docker, GitHub Actions, Nginx, PM2</dd></div>
-      <div><dt>AI</dt><dd>RAG, LangChain · Claude Code, Codex 기반 에이전트 협업 개발</dd></div>
+      <div><dt>Data</dt><dd>PostgreSQL, MySQL, Redis, ChromaDB</dd></div>
+      <div><dt>Infra</dt><dd>AWS (EC2, RDS, S3, VPC), Docker, GitHub Actions, nginx, PM2</dd></div>
+      <div><dt>Test</dt><dd>JUnit, Testcontainers</dd></div>
+      <div><dt>AI</dt><dd>RAG, LangChain · Claude Code, Codex 기반 개발과 코드 리뷰</dd></div>
     </dl>
   </section>
 
   <section id="certs" aria-labelledby="certs-title">
-    <h2 class="sec" id="certs-title">Awards &amp; Certifications</h2>
+    <div class="sec-head"><h2 id="certs-title">Awards &amp; Certifications</h2></div>
     <div class="grid2">
       <div class="card">
         <h3>Awards</h3>
