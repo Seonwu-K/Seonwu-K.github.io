@@ -20,7 +20,7 @@
     --bg: #ffffff;
     --ink: #111111;
     --ink-2: #4b4b4b;
-    --muted: #7c7c7c;
+    --muted: #6b6b6b;
     --line: #ebebeb;
     --soft: #f3f3f3;
     --panel: #fafafa;
@@ -74,7 +74,7 @@
   .photo.noimg .initials { display: grid; }
   .about h1 { font-size: 46px; line-height: 1.1; margin: 0 0 14px; }
   .headline { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.45; margin: 0 0 12px; }
-  .lead { color: var(--muted); font-size: 17px; margin: 0; }
+  .lead { color: var(--muted); font-size: 17px; margin: 0; max-width: 42em; }
   .btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 12px; font-size: 14px; font-weight: 600; text-decoration: none; border: 1px solid var(--line); background: #fff; }
   .btn.dark { background: var(--ink); border-color: var(--ink); color: #fff; }
   .btn:hover { border-color: var(--ink); }
@@ -98,8 +98,14 @@
   .fig { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px; overflow-x: auto; }
   .fig svg { display: block; width: 100%; min-width: 640px; height: auto; font-family: var(--sans); }
   figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; }
+  .fig-frame { position: relative; }
+  .fig-frame::after { content: ""; position: absolute; top: 1px; right: 1px; bottom: 1px; width: 48px; border-radius: 0 16px 16px 0; background: linear-gradient(to right, rgba(250,250,250,0), #fafafa 85%); pointer-events: none; opacity: 0; transition: opacity .2s; }
+  .fig-frame.can-scroll::after { opacity: 1; }
+  .fig-frame.at-end::after { opacity: 0; }
+  .fig-hint { display: none; margin: 8px 0 0; font-size: 13px; color: var(--muted); }
+  .fig-frame.can-scroll + .fig-hint { display: block; }
   .psr { display: grid; gap: 24px; }
-  .psr ul { margin: 0; padding-left: 20px; display: grid; gap: 7px; }
+  .psr ul { margin: 0; padding-left: 20px; display: grid; gap: 7px; max-width: 46em; }
   .psr li { color: var(--ink-2); font-size: 15px; }
   .psr li::marker { color: #bdbdbd; }
   .psr li b { color: var(--ink); }
@@ -115,9 +121,9 @@
   .d-line-bad { stroke: #c2412d; stroke-width: 1.6; fill: none; }
   .d-line-good { stroke: #1f8a4c; stroke-width: 1.8; fill: none; }
   .d-t { fill: #111; font-size: 13px; font-weight: 600; }
-  .d-s { fill: #555; font-size: 11.5px; }
-  .d-m { fill: #8a8f98; font-size: 11px; }
-  .d-h { fill: #8a8f98; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; }
+  .d-s { fill: #4b4f56; font-size: 12.5px; }
+  .d-m { fill: #656a73; font-size: 12px; }
+  .d-h { fill: #656a73; font-size: 11.5px; font-weight: 700; letter-spacing: 0.05em; }
   .d-tb { fill: #b33a27; font-size: 12px; font-weight: 700; }
   .d-tg { fill: #1b7a43; font-size: 12px; font-weight: 700; }
   .d-ta { fill: #2563c9; font-size: 12px; font-weight: 700; }
@@ -169,12 +175,12 @@
   footer { max-width: 1240px; margin: 40px auto 0; padding: 24px 24px 56px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
 
   /* Floating controls */
-  .to-top { position: fixed; right: 24px; bottom: 24px; z-index: 30; width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--ink); color: #fff; font: 700 10px/1 var(--sans); letter-spacing: 0.06em; display: grid; place-items: center; gap: 0; cursor: pointer; box-shadow: 0 8px 24px rgba(0,0,0,.18); opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity .2s, transform .2s; }
+  .to-top { position: fixed; right: 24px; bottom: 24px; z-index: 30; width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--ink); color: #fff; font: 700 11px/1 var(--sans); letter-spacing: 0.04em; display: grid; place-items: center; gap: 0; cursor: pointer; box-shadow: 0 8px 24px rgba(0,0,0,.18); opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity .2s, transform .2s; }
   .to-top svg { width: 14px; height: 14px; margin-bottom: -8px; }
   .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
   .to-top:hover { background: #333; }
   .toc-fab { display: none; position: fixed; left: 16px; bottom: 24px; z-index: 30; border: 0; background: var(--ink); color: #fff; font: 600 13px/1 var(--sans); padding: 11px 15px; border-radius: 999px; box-shadow: 0 8px 24px rgba(0,0,0,.18); cursor: pointer; }
-  .toc-sheet { display: none; position: fixed; left: 16px; right: 16px; bottom: 72px; z-index: 29; max-height: 62vh; overflow-y: auto; background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 16px 8px; box-shadow: 0 16px 40px rgba(0,0,0,.16); }
+  .toc-sheet { display: none; position: fixed; left: 16px; right: 16px; bottom: 72px; z-index: 29; max-height: 62vh; overflow-y: auto; background: #fff; border-radius: 20px; padding: 16px 8px; box-shadow: 0 12px 36px rgba(0,0,0,.18); }
   .toc-sheet.open { display: block; }
   .toc-sheet ol { list-style: none; margin: 0; padding: 0; }
   .toc-sheet a { display: block; padding: 9px 14px; color: var(--ink-2); text-decoration: none; border-radius: 10px; font-size: 15px; }
@@ -851,6 +857,26 @@
   const topBtn = document.querySelector('.to-top');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }));
+
+  // Wide diagrams scroll sideways on small screens: show a fade and a hint until the end is reached.
+  for (const fig of document.querySelectorAll('.fig')) {
+    const frame = document.createElement('div');
+    frame.className = 'fig-frame';
+    fig.parentNode.insertBefore(frame, fig);
+    frame.appendChild(fig);
+    const hint = document.createElement('p');
+    hint.className = 'fig-hint';
+    hint.textContent = '← 좌우로 밀어서 전체 그림 보기 →';
+    frame.after(hint);
+    const sync = () => {
+      const scrollable = fig.scrollWidth > fig.clientWidth + 1;
+      frame.classList.toggle('can-scroll', scrollable);
+      frame.classList.toggle('at-end', scrollable && fig.scrollLeft + fig.clientWidth >= fig.scrollWidth - 2);
+    };
+    fig.addEventListener('scroll', sync, { passive: true });
+    addEventListener('resize', sync);
+    sync();
+  }
 
   // Mobile table of contents reuses the sidebar list.
   const fab = document.querySelector('.toc-fab');
