@@ -41,26 +41,27 @@
 
   /* Top navigation */
   .shell { max-width: 1240px; margin: 0 auto; padding-inline: 24px; }
-  .nav { margin-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 18px 14px 26px; }
-  .brand { font-family: var(--serif); font-size: 26px; text-decoration: none; line-height: 1; }
-  .brand small { font-family: var(--sans); font-size: 13px; color: var(--muted); margin-left: 8px; }
-  .nav-links { display: flex; gap: 28px; font-size: 15px; }
+  .nav { margin-top: 16px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 10px 8px 22px; border-radius: 18px; }
+  .brand { font-family: var(--serif); font-size: 21px; text-decoration: none; line-height: 1; }
+  .brand small { font-family: var(--sans); font-size: 12px; color: var(--muted); margin-left: 6px; }
+  .nav-links { display: flex; gap: 22px; font-size: 14px; }
   .nav-links a { color: var(--muted); text-decoration: none; }
   .nav-links a:hover { color: var(--ink); }
-  .icons { display: flex; gap: 8px; }
-  .icon-btn { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 10px; background: var(--soft); color: var(--ink); }
+  .icons { display: flex; align-items: center; gap: 6px; }
+  .icon-btn { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 9px; background: var(--soft); color: var(--ink); text-decoration: none; }
+  .icon-btn.text { width: auto; padding: 0 12px; font-size: 13px; font-weight: 600; }
   .icon-btn:hover { background: var(--ink); color: #fff; }
-  .icon-btn svg { width: 19px; height: 19px; }
+  .icon-btn svg { width: 17px; height: 17px; }
 
   /* Layout with sticky table of contents */
-  .layout { display: grid; grid-template-columns: 196px minmax(0, 1fr); gap: 36px; margin-top: 28px; align-items: start; }
+  .layout { display: grid; grid-template-columns: 172px minmax(0, 1fr); gap: 32px; margin-top: 24px; align-items: start; }
   .toc { position: sticky; top: 24px; padding: 20px 8px 20px 4px; }
-  .toc-title { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: var(--muted); margin: 0 0 12px 14px; }
+  .toc-title { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; color: var(--muted); margin: 0 0 8px 12px; }
   .toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
-  .toc a { display: block; padding: 6px 12px; border-left: 2px solid transparent; color: var(--muted); text-decoration: none; font-size: 14px; line-height: 1.45; border-radius: 0 8px 8px 0; transition: color .15s, border-color .15s, background .15s; }
+  .toc a { display: block; padding: 4px 10px; border-left: 2px solid transparent; color: var(--muted); text-decoration: none; font-size: 13px; line-height: 1.45; border-radius: 0 8px 8px 0; transition: color .15s, border-color .15s, background .15s; }
   .toc a:hover { color: var(--ink); background: var(--panel); }
   .toc a.active { color: var(--ink); font-weight: 700; border-left-color: var(--ink); background: var(--soft); }
-  .toc .sub a { padding-left: 26px; font-size: 13px; }
+  .toc .sub a { padding-left: 22px; font-size: 12px; }
   main { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; min-width: 0; }
   main > *, .cases > *, .case, .fig { min-width: 0; }
   section { scroll-margin-top: 24px; }
@@ -81,14 +82,6 @@
   .btn.dark { background: var(--ink); border-color: var(--ink); color: #fff; }
   .btn:hover { border-color: var(--ink); }
   .btn svg { width: 16px; height: 16px; }
-
-  /* Highlights */
-  .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-  .stat { padding: 22px; }
-  .stat b { display: block; font-family: var(--serif); font-weight: 400; font-size: 30px; line-height: 1.15; margin-bottom: 8px; font-variant-numeric: lining-nums; white-space: nowrap; }
-  .stat span { display: block; font-size: 13px; color: var(--muted); line-height: 1.55; }
-  .stat.dark { background: var(--ink); border-color: var(--ink); color: #fff; }
-  .stat.dark span { color: #b5b5b5; }
 
   /* Section headings */
   .sec-title { padding: 18px 4px 4px; }
@@ -115,26 +108,26 @@
   .psr li b { color: var(--ink); }
   .result { background: var(--soft); border-radius: 16px; padding: 20px 22px; }
 
-  /* SVG diagram vocabulary: black and white */
-  .d-box { fill: #fff; stroke: #cfcfcf; stroke-width: 1.2; }
-  .d-hl { fill: #fff; stroke: #111; stroke-width: 1.6; }
-  .d-bad { fill: #efefef; stroke: #8a8a8a; stroke-width: 1.3; stroke-dasharray: 5 4; }
-  .d-good { fill: #111; stroke: #111; stroke-width: 1.4; }
-  .d-line { stroke: #555; stroke-width: 1.4; fill: none; }
-  .d-dash { stroke: #c4c4c4; stroke-width: 1.2; fill: none; stroke-dasharray: 4 4; }
-  .d-line-bad { stroke: #8a8a8a; stroke-width: 1.5; fill: none; stroke-dasharray: 5 4; }
-  .d-line-good { stroke: #111; stroke-width: 1.9; fill: none; }
+  /* SVG diagram vocabulary: color is reserved for architecture diagrams */
+  .d-box { fill: #fff; stroke: #cfd4dc; stroke-width: 1.2; }
+  .d-hl { fill: #eaf2fd; stroke: #2563c9; stroke-width: 1.5; }
+  .d-bad { fill: #fdeeeb; stroke: #c2412d; stroke-width: 1.4; }
+  .d-good { fill: #e8f5ec; stroke: #1f8a4c; stroke-width: 1.5; }
+  .d-line { stroke: #5a6270; stroke-width: 1.4; fill: none; }
+  .d-dash { stroke: #c7ccd4; stroke-width: 1.2; fill: none; stroke-dasharray: 4 4; }
+  .d-line-bad { stroke: #c2412d; stroke-width: 1.6; fill: none; }
+  .d-line-good { stroke: #1f8a4c; stroke-width: 1.8; fill: none; }
   .d-t { fill: #111; font-size: 13px; font-weight: 600; }
   .d-s { fill: #555; font-size: 11.5px; }
-  .d-m { fill: #8a8a8a; font-size: 11px; }
-  .d-h { fill: #8a8a8a; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; }
-  .d-tb { fill: #111; font-size: 12px; font-weight: 700; }
-  .d-tg { fill: #fff; font-size: 12px; font-weight: 700; }
-  .d-ta { fill: #111; font-size: 12px; font-weight: 700; }
+  .d-m { fill: #8a8f98; font-size: 11px; }
+  .d-h { fill: #8a8f98; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; }
+  .d-tb { fill: #b33a27; font-size: 12px; font-weight: 700; }
+  .d-tg { fill: #1b7a43; font-size: 12px; font-weight: 700; }
+  .d-ta { fill: #2563c9; font-size: 12px; font-weight: 700; }
   .d-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-  .ah { fill: #555; }
-  .ah-bad { fill: #8a8a8a; }
-  .ah-good { fill: #111; }
+  .ah { fill: #5a6270; }
+  .ah-bad { fill: #c2412d; }
+  .ah-good { fill: #1f8a4c; }
 
   /* Projects: dark cards */
   .proj-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
@@ -176,12 +169,12 @@
   footer { max-width: 1240px; margin: 40px auto 0; padding: 24px 24px 56px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
 
   /* Floating controls */
-  .to-top { position: fixed; right: 24px; bottom: 24px; z-index: 30; width: 56px; height: 56px; border-radius: 50%; border: 0; background: var(--ink); color: #fff; font: 700 11px/1 var(--sans); letter-spacing: 0.06em; display: grid; place-items: center; gap: 0; cursor: pointer; box-shadow: 0 8px 24px rgba(0,0,0,.18); opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity .2s, transform .2s; }
-  .to-top svg { width: 16px; height: 16px; margin-bottom: -6px; }
+  .to-top { position: fixed; right: 24px; bottom: 24px; z-index: 30; width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--ink); color: #fff; font: 700 10px/1 var(--sans); letter-spacing: 0.06em; display: grid; place-items: center; gap: 0; cursor: pointer; box-shadow: 0 8px 24px rgba(0,0,0,.18); opacity: 0; transform: translateY(12px); pointer-events: none; transition: opacity .2s, transform .2s; }
+  .to-top svg { width: 14px; height: 14px; margin-bottom: -8px; }
   .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
   .to-top:hover { background: #333; }
-  .toc-fab { display: none; position: fixed; left: 16px; bottom: 24px; z-index: 30; border: 0; background: var(--ink); color: #fff; font: 600 14px/1 var(--sans); padding: 14px 18px; border-radius: 999px; box-shadow: 0 8px 24px rgba(0,0,0,.18); cursor: pointer; }
-  .toc-sheet { display: none; position: fixed; left: 16px; right: 16px; bottom: 84px; z-index: 29; max-height: 62vh; overflow-y: auto; background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 16px 8px; box-shadow: 0 16px 40px rgba(0,0,0,.16); }
+  .toc-fab { display: none; position: fixed; left: 16px; bottom: 24px; z-index: 30; border: 0; background: var(--ink); color: #fff; font: 600 13px/1 var(--sans); padding: 11px 15px; border-radius: 999px; box-shadow: 0 8px 24px rgba(0,0,0,.18); cursor: pointer; }
+  .toc-sheet { display: none; position: fixed; left: 16px; right: 16px; bottom: 72px; z-index: 29; max-height: 62vh; overflow-y: auto; background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 16px 8px; box-shadow: 0 16px 40px rgba(0,0,0,.16); }
   .toc-sheet.open { display: block; }
   .toc-sheet ol { list-style: none; margin: 0; padding: 0; }
   .toc-sheet a { display: block; padding: 9px 14px; color: var(--ink-2); text-decoration: none; border-radius: 10px; font-size: 15px; }
@@ -200,9 +193,6 @@
     .photo { width: 100%; aspect-ratio: 4 / 3; }
     .about h1 { font-size: 38px; }
     .headline { font-size: 19px; }
-    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-    .stat { padding: 18px 16px; }
-    .stat b { font-size: 23px; }
     .case { padding: 24px 18px; }
     .case h3 { font-size: 18px; }
     .fig { padding: 12px; }
@@ -216,7 +206,6 @@
     .shell { padding-inline: 16px; }
     .nav { padding: 12px 12px 12px 18px; }
     .brand small { display: none; }
-    .stat b { font-size: 19px; }
   }
 </style>
 </head>
@@ -237,9 +226,7 @@
         <a class="icon-btn" href="https://github.com/Seonwu-K" target="_blank" rel="noopener" aria-label="GitHub">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.08-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.82 1.19 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
         </a>
-        <a class="icon-btn" href="https://kimjoraeng.tistory.com/" target="_blank" rel="noopener" aria-label="기술 블로그">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
-        </a>
+        <a class="icon-btn text" href="https://kimjoraeng.tistory.com/" target="_blank" rel="noopener">Blog</a>
         <a class="icon-btn" href="mailto:sunwoo005@naver.com" aria-label="이메일 보내기">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
         </a>
@@ -252,7 +239,6 @@
       <p class="toc-title">목차</p>
       <ol id="toc-list">
         <li><a href="#about">About Me</a></li>
-        <li><a href="#highlights">핵심 성과</a></li>
         <li><a href="#cases">Problem Solving</a></li>
         <li class="sub"><a href="#case-like">01 동시 요청 경합</a></li>
         <li class="sub"><a href="#case-dialect">02 배포 환경 500</a></li>
@@ -280,7 +266,6 @@
           <ul class="chips">
             <li>우아한테크코스 8기 Backend (2026.12 수료 예정)</li>
             <li>인하대학교 정보통신공학 졸업</li>
-            <li>정보처리기사 · SQLD</li>
           </ul>
           <div class="btn-row">
             <a class="btn dark" href="mailto:sunwoo005@naver.com">sunwoo005@naver.com</a>
@@ -290,12 +275,6 @@
         </div>
       </section>
 
-      <section id="highlights" class="stats" aria-label="핵심 성과">
-        <div class="stat card dark"><b>50 / 50</b><span>동시 좋아요 요청 성공 (락 도입 전엔 5건 동시에 500 재현)</span></div>
-        <div class="stat card"><b>0.44 → 0.07s</b><span>구간 측정으로 찾은 API 기본 지연 해소</span></div>
-        <div class="stat card"><b>46.7 → 8.5%</b><span>RAG 적용 전후 환각률 (정확도 82% → 93%)</span></div>
-        <div class="stat card"><b>1st Prize</b><span>UMC 6기 데모데이 대상, 약 60개 팀 중</span></div>
-      </section>
 
       <section id="cases" class="cases" aria-labelledby="cases-title">
         <div class="sec-title">
