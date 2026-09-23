@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="654" viewBox="0 0 1000 654" role="img" font-family="Arial, Apple SD Gothic Neo, Malgun Gothic, sans-serif">
+<title>역할을 분리한 성분 데이터 검수</title><desc>근거 수집과 판정 후 태그와 설명을 각각 생성하고 독립 검증한다. 규칙 기반 게이트에서 자동 반영 후보, 사람 검토, 보류로 나눈다.</desc>
+<rect width="1000" height="654" fill="white"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#58616b"/></marker></defs>
+<text x="32" y="32" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">01  근거 확보</text>
+<rect x="32" y="54" width="232" height="70" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="148.0" y="86.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">식약처 원료성분</text>
+<text x="148.0" y="108.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">22,013건 스냅샷</text>
+<path d="M264 89H338" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="338" y="54" width="254" height="70" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="465.0" y="86.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">근거 수집</text>
+<text x="465.0" y="108.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">출처와 적용 경로 확인</text>
+<path d="M592 89H670" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="670" y="54" width="298" height="70" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="819.0" y="86.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">근거 판정</text>
+<text x="819.0" y="108.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">피부 적용 근거 우선</text>
+<rect x="32" y="184" width="936" height="252" fill="#fafbfc" stroke="#aeb4ba" stroke-width="1.2" stroke-dasharray="6 4"/>
+<text x="48" y="211" font-size="14" font-weight="600" text-anchor="start" fill="#26313b"></text>
+<text x="244" y="211" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">02  생성과 독립 검증</text>
+<path d="M819 124V155H155V259H244" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M155 259V363H244" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="244" y="227" width="242" height="64" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="365.0" y="256.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">태그 제안</text>
+<text x="365.0" y="278.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">카탈로그 코드만 사용</text>
+<path d="M486 259H563" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="563" y="227" width="262" height="64" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="694.0" y="256.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">태그 검증</text>
+<text x="694.0" y="278.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">별도 역할에서 독립 판정</text>
+<rect x="244" y="331" width="242" height="64" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="365.0" y="360.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">설명 작성</text>
+<text x="365.0" y="382.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">승인된 근거만 사용</text>
+<path d="M486 363H563" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="563" y="331" width="262" height="64" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="694.0" y="360.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">설명 검증</text>
+<text x="694.0" y="382.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">주장별 근거 대조</text>
+<path d="M825 259H895V477H590" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M825 363H895" fill="none" stroke="#58616b" stroke-width="1.5"/>
+<rect x="338" y="449" width="252" height="62" fill="#fff2cc" stroke="#d6b656" stroke-width="1.5"/>
+<text x="464.0" y="477.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">규칙 기반 게이트</text>
+<text x="464.0" y="499.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">코드 / 근거 / 위험도</text>
+<path d="M464 511V542H175V565" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M464 542H500V565" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M500 542H826V565" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="32" y="565" width="286" height="64" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="175.0" y="594.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">자동 반영 후보</text>
+<text x="175.0" y="616.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">태그 추가만</text>
+<rect x="357" y="565" width="286" height="64" fill="#fff2cc" stroke="#d6b656" stroke-width="1.5"/>
+<text x="500.0" y="594.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">사람 검토 큐</text>
+<text x="500.0" y="616.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">삭제 / 충돌 / 낮은 확신</text>
+<rect x="682" y="565" width="286" height="64" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+<text x="825.0" y="594.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">보류 기록</text>
+<text x="825.0" y="616.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">근거 부족 / 오류</text>
+<text x="32" y="469" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">역할별 CLI 호출</text>
+<text x="32" y="491" font-size="13" font-weight="400" text-anchor="start" fill="#26313b">Codex / Claude Code</text>
+<text x="32" y="513" font-size="13" font-weight="400" text-anchor="start" fill="#26313b">JSON Schema 응답 계약</text>
+</svg>

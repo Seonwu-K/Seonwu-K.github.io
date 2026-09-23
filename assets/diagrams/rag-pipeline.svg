@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="548" viewBox="0 0 1000 548" role="img" font-family="Arial, Apple SD Gothic Neo, Malgun Gothic, sans-serif">
+<title>뉴스 검색과 근거 기반 응답 흐름</title><desc>뉴스를 전처리하고 임베딩하여 ChromaDB에 저장한다. 사용자 질문으로 관련 기사를 검색한 뒤 프롬프트와 Solar LLM을 거쳐 답변하고 정확도, 관련성, 환각률을 평가한다.</desc>
+<rect width="1000" height="548" fill="white"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#58616b"/></marker></defs>
+<text x="32" y="36" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">01  색인 준비</text>
+<rect x="32" y="67" width="186" height="70" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="125.0" y="99.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">IT 뉴스 수집</text>
+<text x="125.0" y="121.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">3,385건</text>
+<rect x="282" y="67" width="186" height="70" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="375.0" y="99.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">전처리</text>
+<text x="375.0" y="121.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">본문 정리</text>
+<rect x="532" y="67" width="186" height="70" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="625.0" y="99.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">Upstage 임베딩</text>
+<text x="625.0" y="121.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">벡터 변환</text>
+<rect x="782" y="67" width="186" height="70" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="875.0" y="99.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">ChromaDB</text>
+<text x="875.0" y="121.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">벡터 저장소</text>
+<path d="M218 102H282" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M468 102H532" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M718 102H782" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M32 192H968" stroke="#e0e3e6"/>
+<text x="32" y="230" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">02  질문과 검색</text>
+<rect x="32" y="269" width="186" height="70" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="125.0" y="310.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">사용자 질문</text>
+<path d="M218 304H282" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="282" y="269" width="186" height="70" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="375.0" y="301.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">관련 기사 검색</text>
+<text x="375.0" y="323.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">근거 문서 확보</text>
+<path d="M875 137V246H375V269" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<text x="632" y="232" font-size="13" font-weight="400" text-anchor="middle" fill="#26313b">벡터 유사도 검색</text>
+<path d="M468 304H532" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="532" y="269" width="186" height="70" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="625.0" y="301.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">프롬프트 구성</text>
+<text x="625.0" y="323.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">질문 + 검색 근거</text>
+<path d="M718 304H782" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="782" y="269" width="186" height="70" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="875.0" y="301.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">Solar LLM</text>
+<text x="875.0" y="323.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">근거 기반 답변</text>
+<path d="M875 339V429H718" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="282" y="396" width="436" height="66" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="500.0" y="426.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">정량 평가</text>
+<text x="500.0" y="448.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">정확도 / 관련성 / 환각률</text>
+<text x="32" y="513" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">RAG 적용 전후를 동일한 테스트셋으로 비교</text>
+</svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="588" viewBox="0 0 1000 588" role="img" font-family="Arial, Apple SD Gothic Neo, Malgun Gothic, sans-serif">
+<title>테스트와 배포 데이터베이스의 차이</title><desc>H2에서 통과한 null 검색 파라미터가 PostgreSQL에서는 bytea로 추론되었다. 빈 문자열로 정규화하고 방언에 민감한 테스트를 실제 PostgreSQL로 옮겼다.</desc>
+<rect width="1000" height="588" fill="white"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#58616b"/></marker></defs>
+<text x="32" y="36" font-size="18" font-weight="600" text-anchor="start" fill="#26313b">변경 전</text>
+<rect x="32" y="88" width="220" height="76" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="142.0" y="123.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">GalleryService</text>
+<text x="142.0" y="145.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">search = null</text>
+<path d="M252 126H308" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="308" y="88" width="312" height="76" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="464.0" y="123.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">JPQL 검색 조건</text>
+<text x="464.0" y="145.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">:search is null or lower(…)</text>
+<path d="M620 108H669V90H710" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M620 144H669V190H710" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="710" y="57" width="258" height="66" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="839.0" y="87.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">로컬 / CI: H2</text>
+<text x="839.0" y="109.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">테스트 통과</text>
+<rect x="710" y="157" width="258" height="66" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+<text x="839.0" y="187.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">배포: PostgreSQL</text>
+<text x="839.0" y="209.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">500 오류</text>
+<text x="308" y="217" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">null 파라미터를 bytea로 추론</text>
+<text x="308" y="244" font-size="14" font-weight="500" text-anchor="start" fill="#97423e">ERROR: function lower(bytea) does not exist</text>
+<path d="M32 286H968" stroke="#e0e3e6"/>
+<text x="32" y="327" font-size="18" font-weight="600" text-anchor="start" fill="#26313b">변경 후</text>
+<rect x="32" y="380" width="220" height="76" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="142.0" y="415.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">normalizeSearch()</text>
+<text x="142.0" y="437.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">null → 빈 문자열</text>
+<path d="M252 418H308" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="308" y="380" width="312" height="76" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="464.0" y="415.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">JPQL 고정 타입 비교</text>
+<text x="464.0" y="437.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">:search = &#x27;&#x27; or lower(…)</text>
+<path d="M620 400H669V378H710" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M620 435H669V485H710" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="710" y="345" width="258" height="66" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="839.0" y="375.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">배포: PostgreSQL</text>
+<text x="839.0" y="397.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">정상 조회</text>
+<rect x="710" y="448" width="258" height="76" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="839.0" y="483.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">Testcontainers</text>
+<text x="839.0" y="505.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">PostgreSQL 통합 테스트</text>
+<text x="32" y="557" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">방언에 민감한 테스트는 실제 DB로 옮기고, 나머지는 H2를 유지</text>
+</svg>

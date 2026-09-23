@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" font-family="Arial, Apple SD Gothic Neo, Malgun Gothic, sans-serif">
+<title>동시 요청의 경합과 멱등 처리</title><desc>변경 전에는 동시에 좋아요를 추가해 unique 제약 위반이 발생한다. 변경 후에는 User 행 잠금으로 요청을 직렬화하고 멱등 PUT 요청으로 재시도 시 상태를 유지한다.</desc>
+<rect width="1000" height="640" fill="white"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#58616b"/></marker></defs>
+<text x="32" y="36" font-size="18" font-weight="600" text-anchor="start" fill="#26313b">변경 전</text>
+<text x="534" y="36" font-size="18" font-weight="600" text-anchor="start" fill="#26313b">변경 후</text>
+<path d="M500 24V612" stroke="#e0e3e6"/>
+<rect x="32" y="68" width="204" height="64" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="134.0" y="97.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">POST /toggle</text>
+<text x="134.0" y="119.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">동시 요청 A</text>
+<path d="M134 132V184" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="32" y="184" width="204" height="64" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="134.0" y="213.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">좋아요 조회</text>
+<text x="134.0" y="235.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">두 요청 모두 없음</text>
+<path d="M134 248V281H250V311" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="264" y="68" width="204" height="64" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="366.0" y="97.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">POST /toggle</text>
+<text x="366.0" y="119.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">동시 요청 B</text>
+<path d="M366 132V184" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="264" y="184" width="204" height="64" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="366.0" y="213.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">좋아요 조회</text>
+<text x="366.0" y="235.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">두 요청 모두 없음</text>
+<path d="M366 248V281H250V311" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="32" y="311" width="436" height="64" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+<text x="250.0" y="340.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">두 요청 모두 INSERT</text>
+<text x="250.0" y="362.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">같은 사용자와 게시글 조합</text>
+<path d="M250 375V427" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="32" y="427" width="436" height="64" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+<text x="250.0" y="456.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">Unique 제약 위반 → 500</text>
+<text x="250.0" y="478.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">동시 요청으로 경합 발생</text>
+<text x="32" y="547" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">재시도에도 같은 문제가 남음</text>
+<text x="32" y="575" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">토글 요청이 한 번 더 실행되면</text>
+<text x="32" y="598" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">처음 추가한 좋아요가 다시 삭제됨</text>
+<rect x="534" y="68" width="202" height="64" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="635.0" y="97.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">PUT /like</text>
+<text x="635.0" y="119.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">liked: true</text>
+<path d="M635 132V161H750V184" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="766" y="68" width="202" height="64" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="867.0" y="97.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">PUT /like</text>
+<text x="867.0" y="119.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">liked: true</text>
+<path d="M867 132V161H750V184" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="534" y="184" width="434" height="64" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="751.0" y="213.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">User 행 비관적 락</text>
+<text x="751.0" y="235.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">SELECT … FOR UPDATE</text>
+<path d="M635 248V311" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M867 248V311" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="534" y="311" width="202" height="64" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="635.0" y="340.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">A: 먼저 실행</text>
+<text x="635.0" y="362.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">없음 → INSERT</text>
+<rect x="766" y="311" width="202" height="64" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="867.0" y="340.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">B: 대기 후 실행</text>
+<text x="867.0" y="362.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">이미 있음 → no-op</text>
+<path d="M635 375V401H750V427" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M867 375V401H750" fill="none" stroke="#58616b" stroke-width="1.5"/>
+<rect x="534" y="427" width="434" height="64" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="751.0" y="456.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">likeCount = 1</text>
+<text x="751.0" y="478.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">같은 요청을 반복해도 같은 상태</text>
+<text x="534" y="547" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">동시성과 재시도를 함께 처리</text>
+<text x="534" y="575" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">행 잠금으로 같은 사용자의 요청을 직렬화</text>
+<text x="534" y="598" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">멱등 API로 재시도해도 결과 유지</text>
+</svg>
