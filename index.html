@@ -45,15 +45,15 @@
       <section id="cases" aria-labelledby="cases-title">
         <div class="sec-title"><h2 id="cases-title">문제 해결 기록</h2><span class="section-en">Selected cases</span></div>
         <ol class="case-index">
-<li><a href="#case-poudy-infra"><span class="index-no">01</span><span class="index-title">배포와 데이터 복구 경로 설계</span><span class="index-project">Poudy</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
-<li><a href="#case-poudy-agent"><span class="index-no">02</span><span class="index-title">생성과 검증을 분리한 성분 데이터 파이프라인</span><span class="index-project">Poudy</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
-<li><a href="#case-like"><span class="index-no">03</span><span class="index-title">동시 요청에도 일관된 좋아요 상태</span><span class="index-project">Layer Archive</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
-<li><a href="#case-dialect"><span class="index-no">04</span><span class="index-title">테스트를 통과하고도 발생한 배포 오류</span><span class="index-project">Layer Archive</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
-<li><a href="#case-rag"><span class="index-no">05</span><span class="index-title">검색 근거로 줄인 뉴스 QA의 환각</span><span class="index-project">IT 뉴스 RAG</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
+<li><a href="#case-poudy-infra"><span class="index-no">01</span><span class="index-title">데이터 교체 실패 시 이전 상태로 복구하도록 배포 구성</span><span class="index-project">Poudy</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
+<li><a href="#case-poudy-agent"><span class="index-no">02</span><span class="index-title">AI가 작성한 성분 정보를 별도로 검증하도록 파이프라인 설계</span><span class="index-project">Poudy</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
+<li><a href="#case-like"><span class="index-no">03</span><span class="index-title">동시 요청과 재시도로 발생한 좋아요 오류 해결</span><span class="index-project">Layer Archive</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
+<li><a href="#case-dialect"><span class="index-no">04</span><span class="index-title">로컬에서는 통과하고 배포 환경에서만 발생한 조회 오류 해결</span><span class="index-project">Layer Archive</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
+<li><a href="#case-rag"><span class="index-no">05</span><span class="index-title">뉴스 기사를 검색해 AI가 없는 내용을 지어내는 문제 개선</span><span class="index-project">IT 뉴스 RAG</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
 </ol>
 <article class="case" id="case-poudy-infra" aria-labelledby="case-title-1">
   <div class="case-top"><span class="case-no">01</span><span class="proj">Poudy</span><span class="case-context">인프라 / 2026.08 – 현재</span></div>
-  <h3 id="case-title-1">배포와 데이터 복구 경로 설계</h3>
+  <h3 id="case-title-1">데이터 교체 실패 시 이전 상태로 복구하도록 배포 구성</h3>
   <p class="case-deck">컨테이너 이미지 배포가 어려운 환경에서 systemd와 CodeDeploy로 배포를 구성하고, S3 데이터 교체에 실패하면 복구할 수 있는 경로를 마련했습니다.</p>
   <figure>
     <div class="figure-heading"><p class="figure-title">배포 아키텍처</p><a href="assets/diagrams/poudy-infrastructure.png" data-diagram aria-label="배포 아키텍처 크게 보기">크게 보기 ↗</a></div>
@@ -90,7 +90,7 @@
       </article>
 <article class="case" id="case-poudy-agent" aria-labelledby="case-title-2">
   <div class="case-top"><span class="case-no">02</span><span class="proj">Poudy</span><span class="case-context">AI 데이터 파이프라인 / 2026.08 – 현재</span></div>
-  <h3 id="case-title-2">생성과 검증을 분리한 성분 데이터 파이프라인</h3>
+  <h3 id="case-title-2">AI가 작성한 성분 정보를 별도로 검증하도록 파이프라인 설계</h3>
   <p class="case-deck">성분 설명과 태그를 만드는 작업을 근거 수집, 생성, 독립 검증으로 분리하고 규칙 기반 승인 게이트를 두었습니다.</p>
   <figure>
     <div class="figure-heading"><p class="figure-title">역할별 에이전트 검수 흐름</p><a href="assets/diagrams/ingredient-review.png" data-diagram aria-label="역할별 에이전트 검수 흐름 크게 보기">크게 보기 ↗</a></div>
@@ -127,7 +127,7 @@
       </article>
 <article class="case" id="case-like" aria-labelledby="case-title-3">
   <div class="case-top"><span class="case-no">03</span><span class="proj">Layer Archive</span><span class="case-context">동시성 / 멱등성</span></div>
-  <h3 id="case-title-3">동시 요청에도 일관된 좋아요 상태</h3>
+  <h3 id="case-title-3">동시 요청과 재시도로 발생한 좋아요 오류 해결</h3>
   <p class="case-deck">동시에 들어오는 좋아요 요청의 경합은 행 잠금으로, 재시도할 때 생기는 상태 변화는 멱등 PUT API로 해결했습니다.</p>
   <figure>
     <div class="figure-heading"><p class="figure-title">요청 흐름 (변경 전 / 후)</p><a href="assets/diagrams/concurrent-likes.png" data-diagram aria-label="요청 흐름 (변경 전 / 후) 크게 보기">크게 보기 ↗</a></div>
@@ -164,7 +164,7 @@
       </article>
 <article class="case" id="case-dialect" aria-labelledby="case-title-4">
   <div class="case-top"><span class="case-no">04</span><span class="proj">Layer Archive</span><span class="case-context">배포 장애 대응 / 2026.07</span></div>
-  <h3 id="case-title-4">테스트를 통과하고도 발생한 배포 오류</h3>
+  <h3 id="case-title-4">로컬에서는 통과하고 배포 환경에서만 발생한 조회 오류 해결</h3>
   <p class="case-deck">H2와 PostgreSQL의 타입 추론 차이를 배포 로그로 추적하고, 실제 데이터베이스를 사용하는 통합 테스트로 재발을 방지했습니다.</p>
   <figure>
     <div class="figure-heading"><p class="figure-title">테스트 환경과 배포 환경 (변경 전 / 후)</p><a href="assets/diagrams/database-consistency.png" data-diagram aria-label="테스트 환경과 배포 환경 (변경 전 / 후) 크게 보기">크게 보기 ↗</a></div>
@@ -200,7 +200,7 @@
       </article>
 <article class="case" id="case-rag" aria-labelledby="case-title-5">
   <div class="case-top"><span class="case-no">05</span><span class="proj">IT 뉴스 RAG</span><span class="case-context">졸업 캡스톤 / 2025.03 – 2025.06</span></div>
-  <h3 id="case-title-5">검색 근거로 줄인 뉴스 QA의 환각</h3>
+  <h3 id="case-title-5">뉴스 기사를 검색해 AI가 없는 내용을 지어내는 문제 개선</h3>
   <p class="case-deck">검색한 기사를 답변 근거로 제공하고, 직접 설계한 평가 지표와 테스트셋으로 RAG 적용 전후를 비교했습니다.</p>
   <figure>
     <div class="figure-heading"><p class="figure-title">데이터 흐름</p><a href="assets/diagrams/rag-pipeline.png" data-diagram aria-label="데이터 흐름 크게 보기">크게 보기 ↗</a></div>
