@@ -61,3 +61,15 @@ cp ingredient-admin.png ../../assets/diagrams/
 ```
 
 그림 규칙: 상자에는 이름 한 줄만, 설명은 본문에서. 흰 상자와 검정 선, 색은 상자 뒤 그림자로만(연분홍 문제, 연보라 새 흐름, 진보라 핵심 결과물, 노랑 예외, 회색 사람과 보조 저장소). 묶음은 회색 점선 테두리.
+
+그림을 바꾼 뒤에는 `index.html`의 이미지 주소 뒤 `?v=` 값을 새 파일의 해시로 바꾼다(GitHub Pages가 이미지를 10분간 캐시하므로, 주소가 같으면 방문자가 예전 그림을 볼 수 있다).
+
+```sh
+python3 - <<'PY'
+import re,hashlib
+from pathlib import Path
+p=Path('index.html'); s=p.read_text(encoding='utf-8')
+s=re.sub(r'((?:src|href)=")(assets/diagrams/[\w-]+\.png)(?:\?v=\w+)?"', lambda m: f'{m.group(1)}{m.group(2)}?v={hashlib.md5(Path(m.group(2)).read_bytes()).hexdigest()[:8]}"', s)
+p.write_text(s,encoding='utf-8')
+PY
+```
