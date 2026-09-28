@@ -25,7 +25,7 @@ arrow('aa2',200,260,[[0,0],[0,50]])
 # stacked cards for repeated image queries
 plain('st3',94,334,260,60,'#ffc9c9'); plain('st2',82,322,260,60,'#ffe3e3')
 E.append({"type":"rectangle","id":"a3","x":70,"y":310,"width":260,"height":60,"backgroundColor":"#ffffff","fillStyle":"solid","strokeColor":INK,"strokeWidth":2,"roundness":{"type":3},"label":{"text":"이미지 조회","fontSize":20}})
-arrow('loop',330,340,[[0,0],[90,0],[90,-100],[10,-100]],label='N+1 반복 50회',dashed=True)
+arrow('loop',330,340,[[0,0],[90,0],[90,-100],[10,-100]],label='N+1 (N=50)',dashed=True)
 arrow('aa3',200,394,[[0,0],[0,46]])
 box('a4',70,440,260,60,'좋아요 수, 태그\nIN 조회 각 1회',GRAY,fs=18)
 arrow('aa4',200,500,[[0,0],[0,50]])
