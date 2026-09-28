@@ -103,6 +103,7 @@ figcaption { margin: 10px 0 0; font-size: 12px; line-height: 1.7; color: var(--m
 .plinks { display: flex; flex-wrap: wrap; gap: 10px 18px; font-size: 12px; }
 .plinks a { text-decoration-color: #b0b0ab; }
 .project-cases { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 13px; margin-bottom: 16px; }
+.project-figure { margin: 4px 0 18px; }
 .project-cases a { text-decoration-color: #b0b0ab; }
 .resume-section { margin-top: 48px; }
 .skill-group { display: grid; grid-template-columns: 160px minmax(0, 1fr); gap: 32px; padding: 17px 0; border-bottom: 1px solid #eeeeeb; }
