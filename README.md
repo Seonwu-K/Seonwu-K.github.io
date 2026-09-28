@@ -44,3 +44,20 @@ bash scripts/export_diagrams.sh
 ## 콘텐츠
 
 디자인 개편에서는 기존 사례의 문제 원인, 해결 과정, 결과를 유지했습니다. 소개, 사례 제목과 요약은 새 레이아웃에 맞춰 줄였으며 프로젝트의 중복 상세 설명은 정리했습니다. 기술적 사실과 성과 수치는 별도의 콘텐츠 수정 단계에서 검토할 수 있습니다.
+
+## Excalidraw 다이어그램 (2026-09-28부터)
+
+새 사례 그림은 Excalidraw 스타일로 그린다. 사례마다 알맞은 그림 형태(흐름도, 시퀀스 등)가 다르므로 그림마다 원본을 따로 만든다.
+
+- `scripts/excalidraw/<이름>.py`: 그림 요소를 만드는 코드. 실행하면 `<이름>.json`을 출력한다
+- `scripts/excalidraw/render.html`, `server.py`: Excalidraw 공식 라이브러리로 JSON을 PNG(2배)로 렌더링하고 저장한다
+
+```sh
+cd scripts/excalidraw
+python3 ingredient-admin.py > ingredient-admin.json
+python3 server.py "$PWD" &   # 127.0.0.1:4180
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --disable-gpu --virtual-time-budget=60000 --dump-dom "http://127.0.0.1:4180/render.html?n=ingredient-admin"
+cp ingredient-admin.png ../../assets/diagrams/
+```
+
+그림 규칙: 상자에는 이름 한 줄만, 설명은 본문에서. 흰 상자와 검정 선, 색은 상자 뒤 그림자로만(연분홍 문제, 연보라 새 흐름, 진보라 핵심 결과물, 노랑 예외, 회색 사람과 보조 저장소). 묶음은 회색 점선 테두리.

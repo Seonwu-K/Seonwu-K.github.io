@@ -57,7 +57,7 @@
   <p class="case-deck">엑셀과 JSON 파일로 관리하던 성분 데이터를 DB와 관리자 화면으로 옮겼습니다. 이제 승인된 변경만 서비스에 반영됩니다.</p>
   <figure>
     <div class="figure-heading"><p class="figure-title">관리 방식 변경 전후</p><a href="assets/diagrams/ingredient-admin.png" data-diagram aria-label="관리 방식 변경 전후 크게 보기">크게 보기 ↗</a></div>
-    <a class="diagram-link" href="assets/diagrams/ingredient-admin.png" data-diagram aria-label="관리 방식 변경 전후 이미지 확대"><img class="diagram-image" src="assets/diagrams/ingredient-admin.png" width="2000" height="1400" alt="변경 전에는 팀원과 AI 검수가 엑셀과 작업별 JSON 파일을 직접 다루고, 서버가 켜질 때 파일 전체를 검사 없이 읽었다. 변경 후에는 관리자 화면에서 API로 변경을 요청하고, 승인된 변경만 확정 데이터에 반영한 뒤 서비스 스키마 검사를 통과한 묶음만 서비스 DB로 보낸다" loading="lazy" decoding="async"></a>
+    <a class="diagram-link" href="assets/diagrams/ingredient-admin.png" data-diagram aria-label="관리 방식 변경 전후 이미지 확대"><img class="diagram-image" src="assets/diagrams/ingredient-admin.png" width="2316" height="1536" alt="변경 전에는 팀원과 AI 검수가 엑셀과 작업별 JSON 파일을 직접 다루고, 서버가 켜질 때 파일 전체를 검사 없이 읽었다. 변경 후에는 관리자 화면에서 API로 변경을 요청하고, 승인된 변경만 확정 데이터에 반영한 뒤 서비스 스키마 검사를 통과한 묶음만 서비스 DB로 보낸다" loading="lazy" decoding="async"></a>
   </figure>
   <div class="psr">
     <div>
@@ -95,7 +95,7 @@
   <p class="case-deck">데이터를 원본 보관, 정리와 확정, 서비스 전달 세 단계로 나누고, 단계마다 코드가 할 일과 AI가 할 일을 구분했습니다.</p>
   <figure>
     <div class="figure-heading"><p class="figure-title">데이터 처리 단계와 원료 한 건의 처리 순서</p><a href="assets/diagrams/data-hub-layers.png" data-diagram aria-label="데이터 처리 단계와 원료 한 건의 처리 순서 크게 보기">크게 보기 ↗</a></div>
-    <a class="diagram-link" href="assets/diagrams/data-hub-layers.png" data-diagram aria-label="데이터 처리 단계와 원료 한 건의 처리 순서 이미지 확대"><img class="diagram-image" src="assets/diagrams/data-hub-layers.png" width="2000" height="1620" alt="데이터를 원본 보관, 정리와 확정, 서비스 전달 세 단계로 나눈다. 원료 한 건은 작업을 가져와 입력을 준비한 뒤 LLM이 근거 찾기, 근거 고르기, 설명과 태그 쓰기, 다른 역할의 검토를 거치고, 규칙 검사 결과에 따라 확정 데이터 반영, 사람 확인 대기, 재시도나 보류로 나뉜다" loading="lazy" decoding="async"></a>
+    <a class="diagram-link" href="assets/diagrams/data-hub-layers.png" data-diagram aria-label="데이터 처리 단계와 원료 한 건의 처리 순서 이미지 확대"><img class="diagram-image" src="assets/diagrams/data-hub-layers.png" width="2316" height="1916" alt="데이터를 원본 보관, 정리와 확정, 서비스 전달 세 단계로 나눈다. 원료 한 건은 작업을 가져와 입력을 준비한 뒤 LLM이 근거 찾기, 근거 고르기, 설명과 태그 쓰기, 다른 역할의 검토를 거치고, 규칙 검사 결과에 따라 확정 데이터 반영, 사람 확인 대기, 재시도나 보류로 나뉜다" loading="lazy" decoding="async"></a>
   </figure>
   <div class="psr">
     <div>

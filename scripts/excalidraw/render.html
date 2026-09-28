@@ -1,0 +1,15 @@
+<!doctype html><meta charset="utf-8"><body><pre id="out">start</pre>
+<script>window.EXCALIDRAW_ASSET_PATH="https://esm.sh/@excalidraw/excalidraw@0.18.0/dist/prod/";</script>
+<script type="module">
+const out=document.getElementById('out');
+try{
+const {convertToExcalidrawElements, exportToBlob}=await import("https://esm.sh/@excalidraw/excalidraw@0.18.0?deps=react@19.1.0,react-dom@19.1.0");
+const name=new URLSearchParams(location.search).get('n');
+const skel=(await (await fetch(name+'.json')).json()).filter(e=>e.type!=='cameraUpdate').map(e=>{delete e.startBinding;delete e.endBinding;return e});
+const els=convertToExcalidrawElements(skel,{regenerateIds:false});
+const blob=await exportToBlob({elements:els,appState:{exportBackground:true,viewBackgroundColor:'#ffffff',exportWithDarkMode:false},files:null,mimeType:'image/png',exportPadding:24,getDimensions:(w,h)=>({width:w*2,height:h*2,scale:2})});
+const url=await new Promise(r=>{const f=new FileReader();f.onload=()=>r(f.result);f.readAsDataURL(blob)});
+await fetch('/save/'+name+'.png',{method:'POST',body:url});
+out.textContent='done '+blob.size;
+}catch(e){out.textContent='ERR '+e.stack}
+</script>
