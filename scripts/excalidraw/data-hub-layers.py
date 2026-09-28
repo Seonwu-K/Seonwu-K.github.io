@@ -4,7 +4,7 @@ PINK='#ffc9c9'; LAV='#d0bfff'; LAV2='#b197fc'; LAVF='#f3f0ff'; YEL='#ffec99'; GR
 def cam(x,y,w,h): E.append({"type":"cameraUpdate","x":x,"y":y,"width":w,"height":h})
 def text(i,x,y,t,fs=22): E.append({"type":"text","id":i,"x":x,"y":y,"text":t,"fontSize":fs,"strokeColor":INK})
 def uline(i,x,y,w,c): E.append({"type":"arrow","id":i,"x":x,"y":y,"width":w,"height":0,"points":[[0,0],[w,0]],"strokeColor":c,"strokeWidth":4,"endArrowhead":None})
-def frame(i,x,y,w,h,c="#868e96"): E.append({"type":"rectangle","id":i,"x":x,"y":y,"width":w,"height":h,"strokeColor":c,"strokeWidth":2,"strokeStyle":"dashed","roundness":{"type":3}})
+def frame(i,x,y,w,h,c="#868e96",sw=2): E.append({"type":"rectangle","id":i,"x":x,"y":y,"width":w,"height":h,"strokeColor":c,"strokeWidth":sw,"strokeStyle":"dashed","roundness":{"type":3}})
 def box(i,x,y,w,h,label,shadow,fill='#ffffff',shape='rectangle'):
     s={"type":shape,"id":i+"s","x":x+8,"y":y+8,"width":w,"height":h,"backgroundColor":shadow,"fillStyle":"solid","strokeColor":shadow,"strokeWidth":1}
     b={"type":shape,"id":i,"x":x,"y":y,"width":w,"height":h,"backgroundColor":fill,"fillStyle":"solid","strokeColor":INK,"strokeWidth":2,"label":{"text":label,"fontSize":20}}
@@ -20,14 +20,14 @@ def arrow(i,x,y,pts,a=None,f1=None,b=None,f2=None,dashed=False,label=None):
 cam(-40,-10,1200,900)
 # top: layers
 frame('ft',20,20,1110,300); text('tt',44,36,'데이터를 세 단계로 나눔'); uline('ut',44,68,240,LAV2)
-frame('l0',44,90,320,210,"#adb5bd"); text('l0t',64,102,'L0  원본 보관',20)
+frame('l0',44,90,320,210,"#b87333",3); text('l0t',64,102,'L0 Bronze  원본 보관',20)
 box('o1',74,140,260,54,'공공데이터, 엑셀',GRAY); box('o2',74,226,260,54,'이전 작업 결과',GRAY)
 arrow('ab1',364,195,[[0,0],[50,0]])
-frame('l1',414,90,330,210,"#adb5bd"); text('l1t',434,102,'L1  정리와 확정',20)
+frame('l1',414,90,330,210,"#868e96",3); text('l1t',434,102,'L1 Silver  정리와 확정',20)
 box('c1',449,140,260,54,'검사 중 데이터',LAV); box('c2',449,226,260,54,'확정 데이터',LAV2,LAVF)
 arrow('ac',579,194,[[0,0],[0,32]],'c1',[0.5,1],'c2',[0.5,0])
 arrow('ab2',744,195,[[0,0],[50,0]])
-frame('l2',794,90,316,210,"#adb5bd"); text('l2t',814,102,'L2  서비스 전달',20)
+frame('l2',794,90,316,210,"#d4a017",3); text('l2t',814,102,'L2 Gold  서비스 전달',20)
 box('g1',822,140,260,54,'배포용 묶음',LAV2,LAVF); box('g2',822,226,260,54,'서비스 DB',GRAY)
 arrow('ag',952,194,[[0,0],[0,32]],'g1',[0.5,1],'g2',[0.5,0])
 # bottom: one item flow
