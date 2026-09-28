@@ -1,61 +1,41 @@
 import json
 E=[]; INK='#1e1e1e'
-LAV='#d0bfff'; LAV2='#b197fc'; LAVF='#f3f0ff'; GRAY='#dee2e6'; YEL='#ffec99'
-def text(i,x,y,t,fs=20,c=INK): E.append({"type":"text","id":i,"x":x,"y":y,"text":t,"fontSize":fs,"strokeColor":c})
-def frame(i,x,y,w,h,label,c="#868e96"):
-    E.append({"type":"rectangle","id":i,"x":x,"y":y,"width":w,"height":h,"strokeColor":c,"strokeWidth":2,"strokeStyle":"dashed","roundness":{"type":3}})
-    text(i+"t",x+16,y+12,label,18,"#495057")
+PINK='#ffc9c9'; PINKF='#fff5f5'; LAV='#d0bfff'; LAV2='#b197fc'; LAVF='#f3f0ff'; GRAY='#dee2e6'; YEL='#ffec99'
+def text(i,x,y,t,fs=22,c=INK): E.append({"type":"text","id":i,"x":x,"y":y,"text":t,"fontSize":fs,"strokeColor":c})
+def uline(i,x,y,w,c): E.append({"type":"arrow","id":i,"x":x,"y":y,"width":w,"height":0,"points":[[0,0],[w,0]],"strokeColor":c,"strokeWidth":4,"endArrowhead":None})
+def frame(i,x,y,w,h): E.append({"type":"rectangle","id":i,"x":x,"y":y,"width":w,"height":h,"strokeColor":"#868e96","strokeWidth":2,"strokeStyle":"dashed","roundness":{"type":3}})
 def box(i,x,y,w,h,label,shadow=GRAY,fill='#ffffff',fs=20):
     E.append({"type":"rectangle","id":i+"s","x":x+8,"y":y+8,"width":w,"height":h,"backgroundColor":shadow,"fillStyle":"solid","strokeColor":shadow,"strokeWidth":1,"roundness":{"type":3}})
     E.append({"type":"rectangle","id":i,"x":x,"y":y,"width":w,"height":h,"backgroundColor":fill,"fillStyle":"solid","strokeColor":INK,"strokeWidth":2,"roundness":{"type":3},"label":{"text":label,"fontSize":fs}})
-def tile(i,x,y,label,color):
-    E.append({"type":"rectangle","id":i,"x":x,"y":y,"width":56,"height":44,"backgroundColor":color,"fillStyle":"solid","strokeColor":INK,"strokeWidth":1,"label":{"text":label,"fontSize":16,"strokeColor":"#ffffff"}})
 def arrow(i,x,y,pts,label=None,dashed=False):
     d={"type":"arrow","id":i,"x":x,"y":y,"width":pts[-1][0],"height":pts[-1][1],"points":pts,"strokeColor":INK,"strokeWidth":2,"endArrowhead":"arrow"}
     if label: d["label"]={"text":label,"fontSize":16}
     if dashed: d["strokeStyle"]="dashed"
     E.append(d)
-AWS='#e8590c'; S3C='#2f9e44'
-# client
-E.append({"type":"ellipse","id":"cl","x":30,"y":230,"width":180,"height":180,"backgroundColor":"#ffffff","fillStyle":"solid","strokeColor":INK,"strokeWidth":2,"label":{"text":"웹, 앱\n사용자","fontSize":20}})
-# frontend EC2
-frame('fe',260,110,310,390,'Frontend EC2'); tile('fetile',506,94,'EC2',AWS)
-box('ng',290,160,250,80,'Nginx',GRAY)
-box('nx',290,300,250,80,'Next.js',GRAY)
-box('fa',290,420,120,44,'Alloy',YEL,fs=16)
-arrow('a1',210,300,[[0,0],[80,-100]],label='poudy.site')
-arrow('a2',415,240,[[0,0],[0,60]],label='페이지')
-# backend EC2
-frame('be',630,110,290,230,'Backend EC2'); tile('betile',856,94,'EC2',AWS)
-box('sp',660,160,230,90,'Spring Boot',GRAY)
-box('ba',660,280,110,44,'Alloy',YEL,fs=16)
-arrow('a3',540,200,[[0,0],[120,0]],label='/api/*')
-arrow('a4',540,340,[[0,0],[120,-100]])
-# DB EC2
-frame('db',630,380,290,150,'DB EC2'); tile('dbtile',856,364,'EC2',AWS)
-box('pg',660,430,230,70,'PostgreSQL',GRAY)
-arrow('a5',830,250,[[0,0],[0,180]],label='사설망')
-# S3
-box('s3a',990,160,190,80,'피드백 이미지',GRAY); tile('s3at',1140,144,'S3',S3C)
-box('s3b',990,430,190,70,'DB 백업',GRAY); tile('s3bt',1140,414,'S3',S3C)
-arrow('a6',890,200,[[0,0],[100,0]])
-arrow('a7',890,465,[[0,0],[100,0]],label='매일')
-# monitoring EC2
-frame('mo',260,580,920,190,'Monitoring EC2','#9775fa'); next(e for e in E if e['id']=='mot').update(x=276,y=738); tile('motile',1116,564,'EC2',AWS)
-box('cf',290,640,200,80,'Cloudflare Tunnel',LAV,fs=18)
-box('pm',560,625,170,50,'Prometheus',LAV,fs=18)
-box('lk',560,690,170,50,'Loki',LAV,fs=18)
-box('gf',800,640,160,80,'Grafana',LAV2,LAVF)
-box('bb',1000,640,160,80,'Blackbox',LAV,fs=18)
-arrow('m1',350,464,[[0,0],[0,176]],label='지표, 로그',dashed=True)
-arrow('m2',660,302,[[0,0],[-60,0],[-60,258],[-190,258],[-190,338]],dashed=True)
-arrow('m3',490,670,[[0,0],[70,-20]])
-arrow('m4',490,690,[[0,0],[70,25]])
-arrow('m5',730,650,[[0,0],[70,20]])
-arrow('m6',730,715,[[0,0],[70,-20]])
-arrow('m7',1080,640,[[0,0],[0,-30],[-435,-30],[-435,-15]],label='확인 결과')
-
-# alert path and external probe
-box('dc',800,830,160,64,'팀 Discord',YEL)
-arrow('al',880,720,[[0,0],[0,110]],label='알림')
+# before: rollback hides the failed deploy
+frame('fb',20,20,1120,330); text('tb',44,36,'변경 전  롤백에 가려진 배포 실패'); uline('ub',44,68,330,PINK)
+box('b1',50,110,180,60,'새 버전 배포')
+box('b2',300,110,200,60,'백엔드 기동 실패',PINK)
+box('b3',570,110,160,60,'자동 롤백')
+box('b4',800,110,300,60,'이전 버전으로 정상 화면')
+arrow('ab1',230,140,[[0,0],[70,0]])
+arrow('ab2',500,140,[[0,0],[70,0]])
+arrow('ab3',730,140,[[0,0],[70,0]])
+box('c1',300,250,200,60,'CloudWatch, SNS')
+box('c2',570,250,530,60,'알림 없음, 48시간 뒤 발견',PINK,PINKF)
+arrow('ac0',400,170,[[0,0],[0,80]],label='EC2 생존만 확인',dashed=True)
+arrow('ac1',500,280,[[0,0],[70,0]])
+# after: process-level monitoring and team alert
+frame('fa',20,390,1120,370); text('ta',44,406,'변경 후  프로세스까지 보는 모니터링과 알림'); uline('ua',44,438,430,LAV2)
+box('a1',40,480,180,80,'서버별 Alloy')
+box('a2',340,490,190,60,'Cloudflare Tunnel',LAV,fs=18)
+box('a3',600,490,200,60,'Prometheus, Loki',LAV,fs=18)
+box('a4',870,490,230,60,'Grafana 알림 규칙',LAV2,LAVF)
+box('a5',870,650,230,64,'팀 Discord',YEL)
+box('a6',600,650,200,64,'Blackbox',LAV,fs=18)
+arrow('aa1',220,520,[[0,0],[120,0]],label='지표, 로그')
+arrow('aa2',530,520,[[0,0],[70,0]])
+arrow('aa3',800,520,[[0,0],[70,0]])
+arrow('aa4',985,550,[[0,0],[0,100]],label='조건 지속 시')
+arrow('aa5',700,650,[[0,0],[0,-100]],label='공개 주소 확인')
 print(json.dumps(E,ensure_ascii=False,separators=(',',':')))
