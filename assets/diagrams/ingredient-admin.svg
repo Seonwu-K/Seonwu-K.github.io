@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="700" viewBox="0 0 1000 700" role="img" font-family="Arial, Apple SD Gothic Neo, Malgun Gothic, sans-serif">
+<title>성분 데이터 운영 경로 변경</title><desc>변경 전에는 운영자와 에이전트가 엑셀과 실행별 JSON을 직접 다루고 서비스가 기동 시 통째로 읽었다. 변경 후에는 관리자 화면이 Control API 명령으로만 상태를 바꾸고, 승인된 변경만 canonical에 반영해 검증을 통과한 릴리스로 서비스에 전달한다.</desc>
+<rect width="1000" height="700" fill="white"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#58616b"/></marker></defs>
+<text x="32" y="32" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">변경 전  파일 기반 운영</text>
+<rect x="32" y="58" width="150" height="62" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="107.0" y="95.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">운영자</text>
+<rect x="32" y="150" width="150" height="62" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="107.0" y="187.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">검수 에이전트</text>
+<path d="M182 89H232" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M182 181H232" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="232" y="58" width="250" height="62" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+<text x="357.0" y="86.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">엑셀 작업본</text>
+<text x="357.0" y="108.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">도구마다 다르게 열림</text>
+<rect x="232" y="150" width="250" height="62" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+<text x="357.0" y="178.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">실행별 JSON 산출물</text>
+<text x="357.0" y="200.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">반영 여부 불명확</text>
+<path d="M482 89H532V120H578" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M482 181H532V150H578" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="578" y="104" width="300" height="62" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+<text x="728.0" y="132.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">서비스 기동 시 통째 로딩</text>
+<text x="728.0" y="154.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">반영 전 검증 단계 없음</text>
+<text x="32" y="252" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">현재 승인된 값을 한곳에서 조회할 수 없었고, 기준 DB와 최신 산출물이 서로 다른 상태를 가리킴</text>
+<text x="32" y="276" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">데이터만 바뀌어도 서비스가 기동하지 못하는 경우가 발생</text>
+<path d="M32 306H968" stroke="#e0e3e6"/>
+<text x="32" y="344" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">변경 후  DB와 관리자 시스템 기반 운영</text>
+<rect x="32" y="366" width="150" height="62" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="107.0" y="403.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">운영자</text>
+<path d="M182 397H222" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="222" y="366" width="230" height="62" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="337.0" y="394.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">관리자 화면</text>
+<text x="337.0" y="416.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">조회, 검색, 대기 항목</text>
+<path d="M452 397H492" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="492" y="366" width="250" height="62" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="617.0" y="394.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">Control API 명령</text>
+<text x="617.0" y="416.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">멱등 키 / 버전 검사 / 감사</text>
+<path d="M742 397H782" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="782" y="366" width="186" height="62" fill="#fff2cc" stroke="#d6b656" stroke-width="1.5"/>
+<text x="875.0" y="394.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">명령 거절</text>
+<text x="875.0" y="416.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">등록 버전 불일치</text>
+<path d="M617 428V450H337V470" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M617 428V470" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="222" y="470" width="230" height="62" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="337.0" y="498.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">실행 상태 DB</text>
+<text x="337.0" y="520.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">큐, 임대, 재시도, 호출 장부</text>
+<rect x="492" y="470" width="250" height="62" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="617.0" y="498.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">canonical DB</text>
+<text x="617.0" y="520.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">승인 change set만 반영</text>
+<path d="M617 532V574" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="492" y="574" width="250" height="62" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="617.0" y="602.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">검증 통과 릴리스</text>
+<text x="617.0" y="624.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">계약 검증과 해시 고정</text>
+<path d="M742 605H782" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="782" y="574" width="186" height="62" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="875.0" y="611.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">서비스 DB</text>
+<text x="32" y="494" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">화면은 DB를 직접 고치지 않음</text>
+<text x="32" y="518" font-size="13" font-weight="400" text-anchor="start" fill="#26313b">모든 변경은 명령으로만 처리하고</text>
+<text x="32" y="540" font-size="13" font-weight="400" text-anchor="start" fill="#26313b">실행자와 사유를 감사 기록에 남김</text>
+</svg>

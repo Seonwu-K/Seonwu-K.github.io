@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" font-family="Arial, Apple SD Gothic Neo, Malgun Gothic, sans-serif">
+<title>계층과 단계별 실행 주체</title><desc>수집 원본을 L0로 보존하고 L1에서 정규화와 승인을 거쳐 L2에서 대상 DB 계약을 검증한다. 수집과 검증, 릴리스는 결정론적 코드가, 조사와 작성과 독립 검증은 LLM 서브에이전트가, 큐와 재시도와 감사는 실행 상태 DB가 맡는다.</desc>
+<rect width="1000" height="640" fill="white"/>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#58616b"/></marker></defs>
+<text x="32" y="32" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">데이터 계층</text>
+<rect x="32" y="52" width="296" height="224" fill="#fafbfc" stroke="#aeb4ba" stroke-width="1.2" stroke-dasharray="6 4"/>
+<text x="48" y="79" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">L0 Bronze  수집 원본</text>
+<rect x="52" y="96" width="256" height="62" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="180.0" y="124.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">공공데이터, XLSX</text>
+<text x="180.0" y="146.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">원문 보존과 해시 기록</text>
+<rect x="52" y="186" width="256" height="62" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="180.0" y="214.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">실행별 JSON 산출물</text>
+<text x="180.0" y="236.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">이번 실행의 입력 스냅샷</text>
+<path d="M328 158H352" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="352" y="52" width="296" height="224" fill="#fafbfc" stroke="#aeb4ba" stroke-width="1.2" stroke-dasharray="6 4"/>
+<text x="368" y="79" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">L1 Silver  구조화와 통합</text>
+<rect x="372" y="96" width="256" height="62" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="500.0" y="124.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">staging</text>
+<text x="500.0" y="146.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">정규화, 중복, 충돌 격리</text>
+<path d="M500 158V186" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="372" y="186" width="256" height="62" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="500.0" y="214.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">canonical</text>
+<text x="500.0" y="236.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">승인된 값과 근거, 이력</text>
+<path d="M648 158H672" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="672" y="52" width="296" height="224" fill="#fafbfc" stroke="#aeb4ba" stroke-width="1.2" stroke-dasharray="6 4"/>
+<text x="688" y="79" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">L2 Gold  소비 계약</text>
+<rect x="692" y="96" width="256" height="62" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="820.0" y="124.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">릴리스 빌드</text>
+<text x="820.0" y="146.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">대상 DB 계약 검증</text>
+<path d="M820 158V186" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="692" y="186" width="256" height="62" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="820.0" y="214.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">서비스 DB 적재</text>
+<text x="820.0" y="236.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">출력 해시 고정</text>
+<path d="M32 306H968" stroke="#e0e3e6"/>
+<text x="32" y="344" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">단계별 실행 주체</text>
+<rect x="32" y="366" width="296" height="196" fill="#fafbfc" stroke="#aeb4ba" stroke-width="1.2" stroke-dasharray="6 4"/>
+<text x="48" y="393" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">결정론적 Python과 SQL</text>
+<text x="52" y="424" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">수집과 원본 해시 기록</text>
+<text x="52" y="454" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">import와 타입 정규화</text>
+<text x="52" y="484" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">중복, 누락, 참조 검사</text>
+<text x="52" y="514" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">릴리스와 export 생성</text>
+<rect x="352" y="366" width="296" height="196" fill="#fafbfc" stroke="#aeb4ba" stroke-width="1.2" stroke-dasharray="6 4"/>
+<text x="368" y="393" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">LLM 서브에이전트</text>
+<text x="372" y="424" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">근거 조사와 적합성 판정</text>
+<text x="372" y="454" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">설명과 태그 후보 작성</text>
+<text x="372" y="484" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">별도 역할의 독립 검증</text>
+<text x="372" y="514" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">추가 조사와 사람 승인 대기</text>
+<rect x="672" y="366" width="296" height="196" fill="#fafbfc" stroke="#aeb4ba" stroke-width="1.2" stroke-dasharray="6 4"/>
+<text x="688" y="393" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">실행 상태 DB</text>
+<text x="692" y="424" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">작업 큐와 임대</text>
+<text x="692" y="454" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">재시도와 실패 분류</text>
+<text x="692" y="484" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">모델 호출 장부</text>
+<text x="692" y="514" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">명령과 이벤트 감사</text>
+<text x="32" y="600" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">판단과 순환이 필요한 구간만 LLM이 맡고, 나머지는 같은 입력에서 같은 결과가 나오는 코드로 처리</text>
+</svg>
