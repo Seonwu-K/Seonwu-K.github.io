@@ -47,7 +47,7 @@
         <ol class="case-index">
 <li><a href="#case-ingredient-admin"><span class="index-no">01</span><span class="index-title">파일로 수동 관리하던 성분 데이터를 승인 기반 관리자 시스템으로 전환</span><span class="index-project">Poudy</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
 <li><a href="#case-data-pipeline"><span class="index-no">02</span><span class="index-title">LLM 판단과 코드 검증을 분리한 3계층 성분 데이터 파이프라인 구축</span><span class="index-project">Poudy</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
-<li><a href="#case-poudy-infra"><span class="index-no">03</span><span class="index-title">자동 롤백에 가려 48시간 몰랐던 장애를 계기로 Grafana 모니터링과 팀 알림 도입</span><span class="index-project">Poudy</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
+<li><a href="#case-poudy-infra"><span class="index-no">03</span><span class="index-title">자동 롤백 뒤에 숨은 배포 실패 감지를 위한 인프라 모니터링 체계 도입</span><span class="index-project">Poudy</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
 <li><a href="#case-like"><span class="index-no">04</span><span class="index-title">동시 요청과 재시도로 발생한 좋아요 오류 해결</span><span class="index-project">Layer Archive</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
 <li><a href="#case-list-query"><span class="index-no">05</span><span class="index-title">목록 조회의 N+1 쿼리 해결 (53회 → 4회)</span><span class="index-project">Layer Archive</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
 </ol>
@@ -129,8 +129,8 @@
 </article>
 <article class="case" id="case-poudy-infra" aria-labelledby="case-title-3">
   <div class="case-top"><span class="case-no">03</span><span class="proj">Poudy</span><span class="case-context">배포 / 모니터링 / 2026.09</span></div>
-  <h3 id="case-title-3">자동 롤백에 가려 48시간 몰랐던 장애를 계기로 Grafana 모니터링과 팀 알림 도입</h3>
-  <p class="case-deck">배포가 실패해도 롤백 덕분에 화면은 정상으로 보여 아무도 몰랐던 문제를 계기로, Prometheus, Loki, Grafana로 백엔드 프로세스까지 관측하고 팀 Discord로 알리는 구조를 만들었습니다.</p>
+  <h3 id="case-title-3">자동 롤백 뒤에 숨은 배포 실패 감지를 위한 인프라 모니터링 체계 도입</h3>
+  <p class="case-deck">자동 롤백으로 배포 실패가 묻히던 문제를 계기로 Prometheus, Grafana, Loki 중심의 모니터링 파이프라인을 도입했습니다. 백엔드 프로세스까지 관측하고 Discord 알림을 연동해, 장애를 팀 전체가 바로 알 수 있는 구조를 마련했습니다.</p>
   <figure>
     <div class="figure-heading"><p class="figure-title">운영 구조와 모니터링, 알림 경로</p><a href="assets/diagrams/poudy-monitoring.png?v=5373d349" data-diagram aria-label="운영 구조와 모니터링, 알림 경로 크게 보기">크게 보기 ↗</a></div>
     <a class="diagram-link" href="assets/diagrams/poudy-monitoring.png?v=5373d349" data-diagram aria-label="운영 구조와 모니터링, 알림 경로 이미지 확대"><img class="diagram-image" src="assets/diagrams/poudy-monitoring.png?v=5373d349" width="2428" height="1712" alt="사용자 요청은 Frontend EC2의 Nginx와 Next.js를 거쳐 Backend EC2의 Spring Boot로 가고, Spring Boot는 DB EC2의 PostgreSQL과 S3를 사용한다. Frontend와 Backend EC2의 Alloy가 지표와 로그를 Cloudflare Tunnel을 통해 Monitoring EC2의 Prometheus와 Loki로 보내고, Blackbox의 확인 결과와 함께 Grafana에 모인다. Grafana는 알림을 팀 Discord로 보낸다" loading="lazy" decoding="async"></a>
