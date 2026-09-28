@@ -1,55 +1,80 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="640" viewBox="0 0 1000 640" role="img" font-family="Arial, Apple SD Gothic Neo, Malgun Gothic, sans-serif">
-<title>계층과 단계별 실행 주체</title><desc>수집 원본을 L0로 보존하고 L1에서 정규화와 승인을 거쳐 L2에서 대상 DB 계약을 검증한다. 수집과 검증, 릴리스는 결정론적 코드가, 조사와 작성과 독립 검증은 LLM 서브에이전트가, 큐와 재시도와 감사는 실행 상태 DB가 맡는다.</desc>
-<rect width="1000" height="640" fill="white"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="810" viewBox="0 0 1000 810" role="img" font-family="Arial, Apple SD Gothic Neo, Malgun Gothic, sans-serif">
+<title>데이터 처리 단계와 원료 한 건의 처리 순서</title><desc>데이터를 원본 보관, 정리와 확정, 서비스 전달 세 단계로 나눈다. 원료 한 건은 작업을 가져와 입력을 준비한 뒤 LLM이 근거 찾기, 근거 고르기, 설명과 태그 쓰기, 다른 역할의 검토를 거치고, 규칙 검사 결과에 따라 확정 데이터 반영, 사람 확인 대기, 재시도나 보류로 나뉜다.</desc>
+<rect width="1000" height="810" fill="white"/>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#58616b"/></marker></defs>
-<text x="32" y="32" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">데이터 계층</text>
+<text x="32" y="32" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">데이터를 세 단계로 나눔</text>
 <rect x="32" y="52" width="296" height="224" fill="#fafbfc" stroke="#aeb4ba" stroke-width="1.2" stroke-dasharray="6 4"/>
-<text x="48" y="79" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">L0 Bronze  수집 원본</text>
+<text x="48" y="79" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">L0  원본 보관</text>
 <rect x="52" y="96" width="256" height="62" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
-<text x="180.0" y="124.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">공공데이터, XLSX</text>
-<text x="180.0" y="146.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">원문 보존과 해시 기록</text>
+<text x="180.0" y="124.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">공공데이터, 엑셀</text>
+<text x="180.0" y="146.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">받은 그대로 보관</text>
 <rect x="52" y="186" width="256" height="62" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
-<text x="180.0" y="214.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">실행별 JSON 산출물</text>
-<text x="180.0" y="236.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">이번 실행의 입력 스냅샷</text>
+<text x="180.0" y="214.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">이전 작업 결과 JSON</text>
+<text x="180.0" y="236.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">수정하지 않고 보관</text>
 <path d="M328 158H352" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
 <rect x="352" y="52" width="296" height="224" fill="#fafbfc" stroke="#aeb4ba" stroke-width="1.2" stroke-dasharray="6 4"/>
-<text x="368" y="79" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">L1 Silver  구조화와 통합</text>
+<text x="368" y="79" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">L1  정리와 확정</text>
 <rect x="372" y="96" width="256" height="62" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
-<text x="500.0" y="124.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">staging</text>
-<text x="500.0" y="146.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">정규화, 중복, 충돌 격리</text>
+<text x="500.0" y="124.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">검사 중인 데이터</text>
+<text x="500.0" y="146.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">형식 정리, 중복과 충돌 확인</text>
 <path d="M500 158V186" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
 <rect x="372" y="186" width="256" height="62" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
-<text x="500.0" y="214.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">canonical</text>
-<text x="500.0" y="236.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">승인된 값과 근거, 이력</text>
+<text x="500.0" y="214.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">확정 데이터</text>
+<text x="500.0" y="236.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">승인된 값과 근거, 변경 이력</text>
 <path d="M648 158H672" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
 <rect x="672" y="52" width="296" height="224" fill="#fafbfc" stroke="#aeb4ba" stroke-width="1.2" stroke-dasharray="6 4"/>
-<text x="688" y="79" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">L2 Gold  소비 계약</text>
+<text x="688" y="79" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">L2  서비스 전달</text>
 <rect x="692" y="96" width="256" height="62" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
-<text x="820.0" y="124.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">릴리스 빌드</text>
-<text x="820.0" y="146.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">대상 DB 계약 검증</text>
+<text x="820.0" y="124.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">배포용 묶음 만들기</text>
+<text x="820.0" y="146.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">서비스 스키마에 맞춰 검사</text>
 <path d="M820 158V186" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
 <rect x="692" y="186" width="256" height="62" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
-<text x="820.0" y="214.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">서비스 DB 적재</text>
-<text x="820.0" y="236.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">출력 해시 고정</text>
+<text x="820.0" y="214.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">서비스 DB에 넣기</text>
+<text x="820.0" y="236.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">넣은 뒤 내용이 같은지 확인</text>
 <path d="M32 306H968" stroke="#e0e3e6"/>
-<text x="32" y="344" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">단계별 실행 주체</text>
-<rect x="32" y="366" width="296" height="196" fill="#fafbfc" stroke="#aeb4ba" stroke-width="1.2" stroke-dasharray="6 4"/>
-<text x="48" y="393" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">결정론적 Python과 SQL</text>
-<text x="52" y="424" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">수집과 원본 해시 기록</text>
-<text x="52" y="454" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">import와 타입 정규화</text>
-<text x="52" y="484" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">중복, 누락, 참조 검사</text>
-<text x="52" y="514" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">릴리스와 export 생성</text>
-<rect x="352" y="366" width="296" height="196" fill="#fafbfc" stroke="#aeb4ba" stroke-width="1.2" stroke-dasharray="6 4"/>
-<text x="368" y="393" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">LLM 서브에이전트</text>
-<text x="372" y="424" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">근거 조사와 적합성 판정</text>
-<text x="372" y="454" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">설명과 태그 후보 작성</text>
-<text x="372" y="484" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">별도 역할의 독립 검증</text>
-<text x="372" y="514" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">추가 조사와 사람 승인 대기</text>
-<rect x="672" y="366" width="296" height="196" fill="#fafbfc" stroke="#aeb4ba" stroke-width="1.2" stroke-dasharray="6 4"/>
-<text x="688" y="393" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">실행 상태 DB</text>
-<text x="692" y="424" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">작업 큐와 임대</text>
-<text x="692" y="454" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">재시도와 실패 분류</text>
-<text x="692" y="484" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">모델 호출 장부</text>
-<text x="692" y="514" font-size="14" font-weight="400" text-anchor="start" fill="#26313b">명령과 이벤트 감사</text>
-<text x="32" y="600" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">판단과 순환이 필요한 구간만 LLM이 맡고, 나머지는 같은 입력에서 같은 결과가 나오는 코드로 처리</text>
+<text x="32" y="344" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">원료 한 건이 처리되는 순서</text>
+<rect x="32" y="386" width="180" height="62" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="122.0" y="414.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">작업 가져오기</text>
+<text x="122.0" y="436.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">다른 작업자와 겹치지 않게</text>
+<path d="M212 417H248" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="248" y="386" width="200" height="62" fill="#ffffff" stroke="#91979f" stroke-width="1.5"/>
+<text x="348.0" y="414.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">입력 준비</text>
+<text x="348.0" y="436.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">같은 작업 반복 방지</text>
+<path d="M448 417H484" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="484" y="336" width="484" height="222" fill="#fafbfc" stroke="#aeb4ba" stroke-width="1.2" stroke-dasharray="6 4"/>
+<text x="500" y="363" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">LLM이 맡는 단계 (LangGraph)</text>
+<rect x="504" y="386" width="204" height="62" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="606.0" y="414.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">근거 찾기</text>
+<text x="606.0" y="436.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">논문, 기관 자료</text>
+<path d="M708 417H740" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="740" y="386" width="208" height="62" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="844.0" y="414.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">근거 고르기</text>
+<text x="844.0" y="436.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">피부에 바른 연구 우선</text>
+<path d="M844 448V466H606V484" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="504" y="484" width="204" height="62" fill="#dae8fc" stroke="#6c8ebf" stroke-width="1.5"/>
+<text x="606.0" y="512.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">설명과 태그 쓰기</text>
+<text x="606.0" y="534.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">고른 근거만 사용</text>
+<path d="M708 515H740" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="740" y="484" width="208" height="62" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="844.0" y="512.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">다른 역할이 검토</text>
+<text x="844.0" y="534.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">작성과 검토를 분리</text>
+<path d="M844 546V574H474V598" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="352" y="598" width="244" height="62" fill="#fff2cc" stroke="#d6b656" stroke-width="1.5"/>
+<text x="474.0" y="626.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">규칙 검사</text>
+<text x="474.0" y="648.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">코드로 정한 기준</text>
+<path d="M474 660V684H175V712" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M474 684H500V712" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<path d="M474 684H825V712" fill="none" stroke="#58616b" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="32" y="712" width="286" height="62" fill="#d5e8d4" stroke="#82b366" stroke-width="1.5"/>
+<text x="175.0" y="740.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">확정 데이터에 반영</text>
+<text x="175.0" y="762.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">변경 이력 저장</text>
+<rect x="357" y="712" width="286" height="62" fill="#fff2cc" stroke="#d6b656" stroke-width="1.5"/>
+<text x="500.0" y="740.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">사람 확인 대기</text>
+<text x="500.0" y="762.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">확인 후 이어서 진행</text>
+<rect x="682" y="712" width="286" height="62" fill="#f8cecc" stroke="#b85450" stroke-width="1.5"/>
+<text x="825.0" y="740.0" font-size="16" font-weight="500" text-anchor="middle" fill="#26313b">다시 시도 또는 보류</text>
+<text x="825.0" y="762.0" font-size="13" font-weight="400" text-anchor="middle" fill="#46515c">실패 이유에 따라</text>
+<text x="32" y="494" font-size="14" font-weight="600" text-anchor="start" fill="#26313b">모든 단계를 기록</text>
+<text x="32" y="522" font-size="13" font-weight="400" text-anchor="start" fill="#26313b">작업자가 멈추면 작업을 되돌려 놓고</text>
+<text x="32" y="544" font-size="13" font-weight="400" text-anchor="start" fill="#26313b">이미 성공한 AI 호출은 다시 하지 않음</text>
 </svg>
