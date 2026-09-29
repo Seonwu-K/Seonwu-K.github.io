@@ -94,8 +94,8 @@
   <h3 id="case-title-2">LLM 판단과 코드 검증을 분리한 3계층 성분 데이터 파이프라인 구축</h3>
   <p class="case-deck">성분 데이터를 처리 단계별 3계층(L0 원본 보관, L1 정리와 검토, L2 승인 데이터)으로 나누고, 답이 정해진 검증은 코드가, 판단이 필요한 작업만 LLM이 맡도록 역할을 나눴습니다.</p>
   <figure>
-    <div class="figure-heading"><p class="figure-title">데이터 3계층 구조와 LangGraph 검증 흐름</p><a href="assets/diagrams/data-hub-layers.png?v=0b318415" data-diagram aria-label="데이터 3계층 구조와 LangGraph 검증 흐름 크게 보기">크게 보기 ↗</a></div>
-    <a class="diagram-link" href="assets/diagrams/data-hub-layers.png?v=0b318415" data-diagram aria-label="데이터 3계층 구조와 LangGraph 검증 흐름 이미지 확대"><img class="diagram-image" src="assets/diagrams/data-hub-layers.png?v=0b318415" width="2336" height="1884" alt="데이터는 L0 원본 보관, L1 정리와 검토, L2 승인 데이터 세 계층으로 나뉘고, L2에는 승인된 필드만 올라가 서비스 DB로 반영된다. LangGraph 흐름은 근거 찾기, 근거 고르기, 설명과 태그 쓰기, 다른 역할 검토를 거쳐 코드 기반 정책 게이트로 검증한다. 거절되면 추가 조사로 가고, 통과하면 삭제나 낮은 확신도 제안인지 보고 관리자 검수가 필요한지 판단한다. 필요하면 체크포인트를 저장하고 interrupt로 멈춘 뒤 검수 승인 후 재개하고, 필요 없으면 바로 L1 검토 후보가 되며, 승인되면 L2로 올라간다. LLM 호출 오류는 일시 실패면 RETRY_WAIT 후 재시도하고, 반복 실패면 PARKED로 두고 다음 원료로 넘어간다" loading="lazy" decoding="async"></a>
+    <div class="figure-heading"><p class="figure-title">데이터 3계층 구조와 LangGraph 검증 흐름</p><a href="assets/diagrams/data-hub-layers.png?v=27fb8d0e" data-diagram aria-label="데이터 3계층 구조와 LangGraph 검증 흐름 크게 보기">크게 보기 ↗</a></div>
+    <a class="diagram-link" href="assets/diagrams/data-hub-layers.png?v=27fb8d0e" data-diagram aria-label="데이터 3계층 구조와 LangGraph 검증 흐름 이미지 확대"><img class="diagram-image" src="assets/diagrams/data-hub-layers.png?v=27fb8d0e" width="2336" height="1884" alt="데이터는 L0 원본 보관, L1 정리와 검토, L2 승인 데이터 세 계층으로 나뉘고, L2에는 승인된 필드만 올라가 서비스 DB로 반영된다. LangGraph 흐름은 근거 찾기, 근거 고르기, 설명과 태그 쓰기, 다른 역할 검토를 거쳐 코드 기반 정책 게이트로 검증한다. 거절되면 추가 조사로 가고, 통과하면 삭제나 낮은 확신도 제안인지 보고 관리자 검수가 필요한지 판단한다. 필요하면 체크포인트를 저장하고 interrupt로 멈춘 뒤 검수 승인 후 재개하고, 필요 없으면 바로 L1 검토 후보가 되며, 승인되면 L2로 올라간다. LLM 호출 오류는 일시 실패면 RETRY_WAIT 후 재시도하고, 반복 실패면 PARKED로 두고 다음 원료로 넘어간다" loading="lazy" decoding="async"></a>
   </figure>
   <div class="psr">
     <div>
