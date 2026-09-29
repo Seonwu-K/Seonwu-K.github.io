@@ -56,15 +56,15 @@
   <h3 id="case-title-1">성분 데이터 관리 개선: 정적 파일 방식에서 승인 기반 관리자 시스템으로 전환</h3>
   <p class="case-deck">정적 파일 수동 관리로 생기던 데이터 불일치와 검증 없는 반영을 막기 위해 승인 기반 관리자 시스템을 구축했습니다. API 기반 검증과 승인 절차를 도입해, 검증된 데이터만 서비스 DB에 반영되는 구조를 마련했습니다.</p>
   <figure>
-    <div class="figure-heading"><p class="figure-title">관리 방식 변경 전후</p><a href="assets/diagrams/ingredient-admin.png?v=16cce892" data-diagram aria-label="관리 방식 변경 전후 크게 보기">크게 보기 ↗</a></div>
-    <a class="diagram-link" href="assets/diagrams/ingredient-admin.png?v=16cce892" data-diagram aria-label="관리 방식 변경 전후 이미지 확대"><img class="diagram-image" src="assets/diagrams/ingredient-admin.png?v=16cce892" width="2336" height="1796" alt="변경 전에는 팀원과 AI 검수가 엑셀과 작업별 JSON 파일을 직접 다루고, 서버가 켜질 때 파일 전체를 읽었다. 변경 후에는 관리자 화면에서 변경 요청 API로 요청하면 요청 검증이 버전과 멱등 키를 확인해, 버전이 다르면 거절하고 같은 멱등 키면 기존 결과를 돌려준다. 통과한 요청은 승인 대기로 가서 반려되거나, 추가 조사 뒤 다시 대기하거나, 승인된다. 승인되면 반영 전 재검사를 거치고, 실패하면 반영을 막고 통과하면 확정 데이터(DuckDB, 이력)에 반영한 뒤 CSV와 manifest 릴리스 파일을 만들어 검증용 PostgreSQL 서비스 DB에 넣는다" loading="lazy" decoding="async"></a>
+    <div class="figure-heading"><p class="figure-title">관리 방식 변경 전후</p><a href="assets/diagrams/ingredient-admin.png?v=1d2df3a2" data-diagram aria-label="관리 방식 변경 전후 크게 보기">크게 보기 ↗</a></div>
+    <a class="diagram-link" href="assets/diagrams/ingredient-admin.png?v=1d2df3a2" data-diagram aria-label="관리 방식 변경 전후 이미지 확대"><img class="diagram-image" src="assets/diagrams/ingredient-admin.png?v=1d2df3a2" width="2336" height="1796" alt="변경 전에는 사람마다 다른 버전의 엑셀 파일과 실행마다 쌓인 AI 검수 JSON을 변환 스크립트로 서버용 JSON으로 바꾸고, 사람이 S3에 올리면 운영 EC2가 시작할 때 systemd가 data 경로로 복사하고 Spring이 읽었다. 변경 후에는 관리자 화면에서 변경 요청 API로 요청하면 요청 검증이 버전과 멱등 키를 확인해, 버전이 다르면 거절하고 같은 멱등 키면 기존 결과를 돌려준다. 통과한 요청은 승인 대기로 가서 반려되거나, 추가 조사 뒤 다시 대기하거나, 승인된다. 승인되면 반영 전 재검사를 거치고, 실패하면 반영을 막고 통과하면 확정 데이터(DuckDB, 이력)에 반영한 뒤 CSV와 manifest 릴리스 파일을 만들어 검증용 PostgreSQL 서비스 DB에 넣는다" loading="lazy" decoding="async"></a>
   </figure>
   <div class="psr">
     <div>
       <p class="label">문제 원인</p>
       <ul>
-        <li>성분과 제품 데이터 모두 다루는 사람마다 각자 다른 버전의 엑셀 파일을 만들었고, AI 검수 결과 JSON도 실행할 때마다 따로 쌓였습니다. 이전 기록도 버릴 수 없어 파일은 계속 늘었고, 어느 파일이 최신인지, 누가 마지막으로 고쳤는지 추적하기 어려웠습니다.</li>
-        <li>서비스 데이터 구조도 바뀌었습니다. 처음에는 JSON 파일로 값을 제공하다가 DB로 옮겼지만, 데이터를 만드는 쪽은 여전히 파일 기반이었습니다. 구조가 바뀔 때마다 파일을 사람이 하나하나 맞춰 고쳐야 했고, 실제로 이전에 저장해 둔 태그 DB와 최신 AI 검수 결과가 가리키는 태그 상태가 서로 달랐습니다.</li>
+        <li>성분과 제품 데이터 모두 다루는 사람마다 각자 다른 버전의 엑셀 파일을 만들었고, AI 검수 결과 JSON도 실행할 때마다 따로 쌓였습니다. 임시로 만든 엑셀과 손으로 고친 버전 파일이 여기저기 흩어졌지만 이전 기록도 버릴 수 없어, 어느 파일이 최신인지, 누가 마지막으로 고쳤는지 추적하기 어려웠습니다.</li>
+        <li>서비스에 반영하는 과정도 수동이었습니다. 엑셀을 스크립트로 서버용 JSON으로 바꾸고 사람이 S3에 올려 두면, 운영 EC2가 시작할 때 systemd가 이 파일을 data 경로로 가져오고 Spring이 읽어 썼습니다. 이후 서비스 데이터는 DB로 옮겼지만 데이터를 만드는 쪽은 여전히 파일 기반이라, 구조가 바뀔 때마다 파일을 사람이 하나하나 맞춰 고쳐야 했고, 실제로 이전에 저장해 둔 태그 DB와 최신 AI 검수 결과가 가리키는 태그 상태가 서로 달랐습니다.</li>
         <li>팀원과 AI가 같은 엑셀 파일을 열다 보니 프로그램마다 서식이 다르게 보였고, 잠금 파일이 남는 일도 잦았습니다.</li>
         <li>파일을 고친 뒤 서비스에 반영하기 전에 값을 검사하는 단계가 없어, 잘못된 값도 그대로 서비스에 들어갈 수 있었습니다.</li>
       </ul>

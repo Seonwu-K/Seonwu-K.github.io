@@ -2,16 +2,29 @@
 from exlib import *
 
 c = Canvas()
-c.frame('fb', 20, 20, 1120, 250, '변경 전  파일 수동 관리', PINK)
-c.box('p1', 50, 100, 160, 56, '팀원')
-c.box('p2', 50, 180, 160, 56, 'AI 검수')
-c.box('p3', 270, 100, 220, 56, '엑셀 작업 파일', PINK)
-c.box('p4', 270, 180, 220, 56, '작업별 JSON 파일', PINK)
-c.box('p5', 560, 140, 280, 56, '서버 시작 시 전체 읽기', PINK)
-c.arrow('pa1', 210, 128, [[0, 0], [60, 0]])
-c.arrow('pa2', 210, 208, [[0, 0], [60, 0]])
-c.arrow('pa3', 490, 128, [[0, 0], [70, 30]])
-c.arrow('pa4', 490, 208, [[0, 0], [70, -30]])
+c.frame('fb', 20, 20, 1120, 250, '변경 전  흩어진 파일과 수동 반영', PINK)
+
+
+def stack(i, x, y, w, h, label):
+    """여러 버전 파일: 뒤에 두 장을 겹쳐 그린다."""
+    for k, d in (('2', 16), ('1', 8)):
+        c.E.append({"type": "rectangle", "id": i + 'k' + k, "x": x + d, "y": y - d, "width": w, "height": h,
+                    "backgroundColor": '#ffffff', "fillStyle": "solid", "strokeColor": INK, "strokeWidth": 1,
+                    "roundness": {"type": 3}})
+    c.box(i, x, y, w, h, label, PINK, fs=16)
+
+
+stack('p1', 40, 104, 200, 56, '사람마다 다른 버전\n엑셀 파일')
+stack('p2', 40, 190, 200, 56, '실행마다 쌓인\nAI 검수 JSON')
+c.box('p3', 300, 145, 130, 56, '변환 스크립트', GRAY, fs=16)
+c.box('p4', 470, 145, 140, 56, '서버용 JSON', GRAY, fs=16)
+c.box('p5', 650, 145, 150, 56, 'S3\n(사람이 업로드)', PINK, fs=16)
+c.box('p6', 840, 138, 280, 70, '운영 EC2 시작 시 systemd가\ndata 경로로 복사, Spring이 읽음', GRAY, fs=15)
+c.arrow('pa1', 256, 124, [[0, 0], [44, 40]])
+c.arrow('pa2', 256, 210, [[0, 0], [44, -30]])
+c.arrow('pa3', 430, 173, [[0, 0], [40, 0]])
+c.arrow('pa4', 610, 173, [[0, 0], [40, 0]])
+c.arrow('pa5', 800, 173, [[0, 0], [40, 0]])
 
 c.frame('fa', 20, 300, 1120, 570, '변경 후  승인과 검증 단계를 거치는 관리자 시스템', LAV2)
 # main flow: left to right, then straight down on the right
