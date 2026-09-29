@@ -54,7 +54,7 @@
 <article class="case" id="case-ingredient-admin" aria-labelledby="case-title-1">
   <div class="case-top"><span class="case-no">01</span><span class="proj">Poudy</span><span class="case-context">데이터 관리 / 2026.08 – 현재</span></div>
   <h3 id="case-title-1">성분 데이터 관리 개선: 정적 파일 방식에서 승인 기반 관리자 시스템으로 전환</h3>
-  <p class="case-deck">정적 파일 수동 관리로 생기던 데이터 불일치와 서버 기동 실패를 막기 위해 승인 기반 관리자 시스템을 구축했습니다. API 기반 검증과 승인 절차를 도입해, 검증된 데이터만 서비스 DB에 반영되는 구조를 마련했습니다.</p>
+  <p class="case-deck">정적 파일 수동 관리로 생기던 데이터 불일치와 검증 없는 반영을 막기 위해 승인 기반 관리자 시스템을 구축했습니다. API 기반 검증과 승인 절차를 도입해, 검증된 데이터만 서비스 DB에 반영되는 구조를 마련했습니다.</p>
   <figure>
     <div class="figure-heading"><p class="figure-title">관리 방식 변경 전후</p><a href="assets/diagrams/ingredient-admin.png?v=16cce892" data-diagram aria-label="관리 방식 변경 전후 크게 보기">크게 보기 ↗</a></div>
     <a class="diagram-link" href="assets/diagrams/ingredient-admin.png?v=16cce892" data-diagram aria-label="관리 방식 변경 전후 이미지 확대"><img class="diagram-image" src="assets/diagrams/ingredient-admin.png?v=16cce892" width="2336" height="1796" alt="변경 전에는 팀원과 AI 검수가 엑셀과 작업별 JSON 파일을 직접 다루고, 서버가 켜질 때 파일 전체를 읽었다. 변경 후에는 관리자 화면에서 변경 요청 API로 요청하면 요청 검증이 버전과 멱등 키를 확인해, 버전이 다르면 거절하고 같은 멱등 키면 기존 결과를 돌려준다. 통과한 요청은 승인 대기로 가서 반려되거나, 추가 조사 뒤 다시 대기하거나, 승인된다. 승인되면 반영 전 재검사를 거치고, 실패하면 반영을 막고 통과하면 확정 데이터(DuckDB, 이력)에 반영한 뒤 CSV와 manifest 릴리스 파일을 만들어 검증용 PostgreSQL 서비스 DB에 넣는다" loading="lazy" decoding="async"></a>
@@ -65,7 +65,7 @@
       <ul>
         <li>성분 데이터 원본은 엑셀 파일 하나였고, AI 검수 결과는 실행할 때마다 JSON 파일로 따로 쌓였습니다. 그래서 지금 확정된 값이 무엇인지 한곳에서 볼 수 없었고, 실제로 두 기록의 태그 상태가 서로 달랐습니다.</li>
         <li>팀원과 AI가 같은 엑셀 파일을 열다 보니 프로그램마다 서식이 다르게 보였고, 잠금 파일이 남는 일도 잦았습니다.</li>
-        <li>서버는 켜질 때 S3에서 데이터 파일을 읽어 왔습니다. 새 코드에 필요한 파일을 S3에 미리 올려 두지 않아 서버가 아예 켜지지 못한 적이 있습니다. 직접적인 원인은 업로드 누락이라는 사람의 실수였지만, 파일이 없을 때 이를 막는 방어 로직도, 바로 알아채는 감지 체계도 없었다는 점이 더 큰 문제라고 판단했습니다.</li>
+        <li>파일을 고친 뒤 서비스에 반영하기 전에 값을 검사하는 단계가 없어, 잘못된 값도 그대로 서비스에 들어갈 수 있었습니다.</li>
       </ul>
     </div>
     <div>
