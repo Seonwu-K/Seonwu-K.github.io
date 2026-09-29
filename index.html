@@ -133,8 +133,8 @@
   <h3 id="case-title-3">자동 롤백 뒤에 숨은 배포 실패 감지를 위한 인프라 모니터링 체계 도입</h3>
   <p class="case-deck">자동 롤백으로 배포 실패가 묻히던 문제를 계기로 Prometheus, Grafana, Loki 중심의 모니터링 파이프라인을 도입했습니다. 백엔드 프로세스까지 관측하고 Discord 알림을 연동해, 장애를 팀 전체가 바로 알 수 있는 구조를 마련했습니다.</p>
   <figure>
-    <div class="figure-heading"><p class="figure-title">모니터링과 알림 변경 전후</p><a href="assets/diagrams/poudy-monitoring.png?v=18328c7c" data-diagram aria-label="모니터링과 알림 변경 전후 크게 보기">크게 보기 ↗</a></div>
-    <a class="diagram-link" href="assets/diagrams/poudy-monitoring.png?v=18328c7c" data-diagram aria-label="모니터링과 알림 변경 전후 이미지 확대"><img class="diagram-image" src="assets/diagrams/poudy-monitoring.png?v=18328c7c" width="2336" height="1576" alt="변경 전에는 새 버전 배포에서 백엔드 기동이 실패해도 자동 롤백으로 이전 버전 화면이 정상으로 보였고, CloudWatch와 SNS는 EC2 생존만 확인해 알림이 없어 48시간 뒤에야 발견했다. 변경 후에는 서버별 Alloy가 지표와 로그를 Cloudflare Tunnel을 거쳐 Prometheus와 Loki로 보내고, Blackbox가 공개 주소를 확인하며, Grafana 알림 규칙의 조건이 이어지면 팀 Discord로 알린다" loading="lazy" decoding="async"></a>
+    <div class="figure-heading"><p class="figure-title">모니터링과 알림 변경 전후</p><a href="assets/diagrams/poudy-monitoring.png?v=eea2d3b6" data-diagram aria-label="모니터링과 알림 변경 전후 크게 보기">크게 보기 ↗</a></div>
+    <a class="diagram-link" href="assets/diagrams/poudy-monitoring.png?v=eea2d3b6" data-diagram aria-label="모니터링과 알림 변경 전후 이미지 확대"><img class="diagram-image" src="assets/diagrams/poudy-monitoring.png?v=eea2d3b6" width="2336" height="2296" alt="변경 전: 팀이 새 버전을 배포하면 CodePipeline과 CodeDeploy가 백엔드 EC2에 설치하고 시작하지만, 파일 누락으로 기동에 실패해 이전 버전으로 롤백되고 정상 동작한다. CloudWatch는 EC2 상태와 자원만 확인해 정상으로 보고, 팀은 배포 실패 알림을 받지 못해 48시간 뒤에야 수동으로 확인했다. 변경 후: 서버별 Alloy가 지표와 로그를 Cloudflare Tunnel로 보내 로그는 Loki, 지표는 Prometheus에 쌓이고, Blackbox가 공개 주소를 확인한 결과도 Prometheus로 간다. Grafana 알림 규칙은 조건이 2분 이어지면 팀 Discord로 알리고, 스테이징에서 2~3분 안에 수신을 확인했다" loading="lazy" decoding="async"></a>
   </figure>
   <div class="psr">
     <div>
