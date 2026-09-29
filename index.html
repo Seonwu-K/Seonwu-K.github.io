@@ -56,8 +56,8 @@
   <h3 id="case-title-1">성분 데이터 관리 개선: 정적 파일 방식에서 승인 기반 관리자 시스템으로 전환</h3>
   <p class="case-deck">정적 파일 수동 관리로 생기던 데이터 불일치와 검증 없는 반영을 막기 위해 승인 기반 관리자 시스템을 구축했습니다. API 기반 검증과 승인 절차를 도입해, 검증된 데이터만 서비스 DB에 반영되는 구조를 마련했습니다.</p>
   <figure>
-    <div class="figure-heading"><p class="figure-title">관리 방식 변경 전후</p><a href="assets/diagrams/ingredient-admin.png?v=b90b3118" data-diagram aria-label="관리 방식 변경 전후 크게 보기">크게 보기 ↗</a></div>
-    <a class="diagram-link" href="assets/diagrams/ingredient-admin.png?v=b90b3118" data-diagram aria-label="관리 방식 변경 전후 이미지 확대"><img class="diagram-image" src="assets/diagrams/ingredient-admin.png?v=b90b3118" width="2336" height="1796" alt="변경 전에는 사람마다 각자 관리한 엑셀 파일과 AI가 검수한 엑셀, JSON 파일을 사람이 수동으로 통합하고, 통합한 엑셀을 변환 스크립트로 서버용 JSON으로 바꿔 사람이 S3에 올리면, 운영 EC2가 시작할 때 systemd가 복사하고 Spring이 읽었다. 변경 후에는 관리자 화면에서 변경 요청 API로 요청하면 요청 검증이 버전과 멱등 키를 확인해, 버전이 다르면 거절하고 같은 멱등 키면 기존 결과를 돌려준다. 통과한 요청은 승인 대기로 가서 반려되거나, 추가 조사 뒤 다시 대기하거나, 승인된다. 승인되면 반영 전 재검사를 거치고, 실패하면 반영을 막고 통과하면 확정 데이터(DuckDB, 이력)에 반영한 뒤 CSV와 manifest 릴리스 파일을 만들어 검증용 PostgreSQL 서비스 DB에 넣는다" loading="lazy" decoding="async"></a>
+    <div class="figure-heading"><p class="figure-title">관리 방식 변경 전후</p><a href="assets/diagrams/ingredient-admin.png?v=772bfeaa" data-diagram aria-label="관리 방식 변경 전후 크게 보기">크게 보기 ↗</a></div>
+    <a class="diagram-link" href="assets/diagrams/ingredient-admin.png?v=772bfeaa" data-diagram aria-label="관리 방식 변경 전후 이미지 확대"><img class="diagram-image" src="assets/diagrams/ingredient-admin.png?v=772bfeaa" width="2336" height="1796" alt="변경 전에는 사람마다 각자 관리한 엑셀 파일과 AI가 검수한 엑셀, JSON 파일을 사람이 수동으로 통합하고, 통합한 엑셀을 변환 스크립트로 서버용 JSON으로 바꿔 사람이 S3에 올리면, 운영 EC2가 시작할 때 systemd가 복사하고 Spring이 읽었다. 변경 후에는 관리자 화면에서 변경 요청 API로 요청하면 요청 검증이 버전과 멱등 키를 확인해, 버전이 다르면 거절하고 같은 멱등 키면 기존 결과를 돌려준다. 통과한 요청은 승인 대기로 가서 반려되거나, 추가 조사 뒤 다시 대기하거나, 승인된다. 승인되면 반영 전 재검사를 거치고, 실패하면 반영을 막고 통과하면 확정 데이터(DuckDB, 이력)에 반영한 뒤 CSV와 manifest 릴리스 파일을 만들어 검증용 PostgreSQL 서비스 DB에 넣는다" loading="lazy" decoding="async"></a>
   </figure>
   <div class="psr">
     <div>
