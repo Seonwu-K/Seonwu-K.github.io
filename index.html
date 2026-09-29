@@ -48,7 +48,7 @@
 <li><a href="#case-ingredient-admin"><span class="index-no">01</span><span class="index-title">성분 데이터 관리 개선: 정적 파일 방식에서 승인 기반 관리자 시스템으로 전환</span><span class="index-project">Poudy</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
 <li><a href="#case-data-pipeline"><span class="index-no">02</span><span class="index-title">LLM 판단과 코드 검증을 분리한 3계층 성분 데이터 파이프라인 구축</span><span class="index-project">Poudy</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
 <li><a href="#case-poudy-infra"><span class="index-no">03</span><span class="index-title">자동 롤백 뒤에 숨은 배포 실패 감지를 위한 인프라 모니터링 체계 도입</span><span class="index-project">Poudy</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
-<li><a href="#case-like"><span class="index-no">04</span><span class="index-title">동시 요청과 재시도로 발생한 좋아요 오류 해결</span><span class="index-project">Layer Archive</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
+<li><a href="#case-like"><span class="index-no">04</span><span class="index-title">비관적 락과 상태 지정 API로 좋아요 동시성과 재시도 오류 해결</span><span class="index-project">Layer Archive</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
 <li><a href="#case-list-query"><span class="index-no">05</span><span class="index-title">목록 조회의 N+1 쿼리 해결 (53회 → 4회)</span><span class="index-project">Layer Archive</span><span class="index-arrow" aria-hidden="true">↗</span></a></li>
 </ol>
 <article class="case" id="case-ingredient-admin" aria-labelledby="case-title-1">
@@ -166,11 +166,11 @@
 </article>
 <article class="case" id="case-like" aria-labelledby="case-title-4">
   <div class="case-top"><span class="case-no">04</span><span class="proj">Layer Archive</span><span class="case-context">동시성 / 멱등성 / 2026.07</span></div>
-  <h3 id="case-title-4">동시 요청과 재시도로 발생한 좋아요 오류 해결</h3>
+  <h3 id="case-title-4">비관적 락과 상태 지정 API로 좋아요 동시성과 재시도 오류 해결</h3>
   <p class="case-deck">같은 사용자의 동시 요청에서 나던 중복 오류를 사용자 행 비관적 락(SELECT … FOR UPDATE)으로 순서대로 처리해 없애고, 토글 API를 원하는 상태를 지정하는 방식으로 바꿔 재시도해도 결과가 같도록(멱등성) 했습니다.</p>
   <figure>
-    <div class="figure-heading"><p class="figure-title">동시 요청 처리 변경 전후</p><a href="assets/diagrams/concurrent-likes.png?v=3e1d93ab" data-diagram aria-label="동시 요청 처리 변경 전후 크게 보기">크게 보기 ↗</a></div>
-    <a class="diagram-link" href="assets/diagrams/concurrent-likes.png?v=3e1d93ab" data-diagram aria-label="동시 요청 처리 변경 전후 이미지 확대"><img class="diagram-image" src="assets/diagrams/concurrent-likes.png?v=3e1d93ab" width="2416" height="1336" alt="변경 전에는 요청 A와 B가 동시에 좋아요가 있는지 확인해 둘 다 없음으로 읽고, 둘 다 좋아요를 추가해 한쪽은 성공하고 다른 쪽은 중복 오류가 난다. 변경 후에는 두 요청이 사용자 행 잠금(FOR UPDATE)을 거쳐 하나씩 처리되고, A가 좋아요를 추가한 뒤 B는 이미 좋아요라 그대로 두어 좋아요 1개, 오류 없음으로 끝난다" loading="lazy" decoding="async"></a>
+    <div class="figure-heading"><p class="figure-title">동시 요청 처리와 재시도 결과 비교</p><a href="assets/diagrams/concurrent-likes.png?v=0965b6d3" data-diagram aria-label="동시 요청 처리와 재시도 결과 비교 크게 보기">크게 보기 ↗</a></div>
+    <a class="diagram-link" href="assets/diagrams/concurrent-likes.png?v=0965b6d3" data-diagram aria-label="동시 요청 처리와 재시도 결과 비교 이미지 확대"><img class="diagram-image" src="assets/diagrams/concurrent-likes.png?v=0965b6d3" width="2376" height="1936" alt="변경 전에는 요청 A와 B가 동시에 좋아요가 있는지 DB에 물어 둘 다 없음을 받고, 둘 다 INSERT해 A는 성공하고 B는 중복 키 오류로 실패한다. 변경 후에는 A와 B가 SELECT user FOR UPDATE로 사용자 행을 잠그려 하고, B는 잠금을 기다린다. A가 저장 후 커밋하면 B가 잠금을 얻고 liked=true를 보내지만 이미 좋아요라 변경이 없어 좋아요 1개, 오류 없음으로 끝난다. 같은 요청을 재시도하면 토글 API는 켜짐에서 꺼짐으로 뒤집히지만 상태 지정 API는 켜짐 그대로다" loading="lazy" decoding="async"></a>
   </figure>
   <div class="psr">
     <div>
