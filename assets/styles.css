@@ -91,7 +91,7 @@ figcaption { margin: 10px 0 0; font-size: 12px; line-height: 1.7; color: var(--m
 .psr li::marker { color: var(--muted); font-size: .8em; }
 .psr li + li { margin-top: 12px; }
 .psr li b { color: var(--ink); font-weight: 600; }
-.psr .psr-note { grid-column: 2; margin: 10px 0 0; font-size: 13px; line-height: 1.7; color: var(--muted); }
+.psr .psr-note { grid-column: 2; margin: 10px 0 0; padding-left: 1.15em; font-size: 13px; line-height: 1.7; color: var(--muted); }
 .psr .result { border-top-color: #9d9d98; padding-bottom: 0; }
 #projects { margin-top: 36px; }
 .project-list { display: grid; }
@@ -207,6 +207,7 @@ footer { max-width: 1280px; padding: 28px 48px 40px; margin: 0 auto; display: fl
   .diagram-link { padding: 3px; }
   .case figure { margin-bottom: 24px; }
   .psr > div { grid-template-columns: 1fr; gap: 10px; padding: 20px 0; }
+  .psr .psr-note { grid-column: 1; margin-top: 0; }
   .psr li { font-size: 14px; line-height: 1.9; }
   .psr .label { font-size: 13px; }
   .project { grid-template-columns: 1fr; gap: 16px; padding-block: 26px; }
