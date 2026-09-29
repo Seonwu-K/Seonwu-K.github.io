@@ -11,17 +11,15 @@ def stack(i, x, y, w, h, label):
         c.E.append({"type": "rectangle", "id": i + 'k' + k, "x": x + d, "y": y - d, "width": w, "height": h,
                     "backgroundColor": '#ffffff', "fillStyle": "solid", "strokeColor": INK, "strokeWidth": 1,
                     "roundness": {"type": 3}})
-    c.box(i, x, y, w, h, label, GRAY, fs=16)
+    c.box(i, x, y, w, h, label, None, fs=16)
 
 
 def hmsg(i, x1, x2, y, label, fs=14):
-    """형광펜처럼 글자 뒤에 연분홍 띠를 깐 화살표 라벨."""
+    """수동 작업을 강조하는 화살표 라벨: 글자 아래 연분홍 밑줄."""
     tw = twidth(label, fs)
-    w = tw * 0.86 + 8
-    c.E.append({"type": "rectangle", "id": i + 'h', "x": (x1 + x2) / 2 - tw / 2 - 4, "y": y - 24, "width": w, "height": fs + 6,
-                "backgroundColor": PINK, "fillStyle": "solid", "strokeColor": PINK, "strokeWidth": 1, "opacity": 70,
-                "roughness": 0})
-    c.msg(i, x1, x2, y, label, fs=fs)
+    c.arrow(i, x1, y, [[0, 0], [x2 - x1, 0]])
+    c.ctext(i + 't', (x1 + x2) / 2, y - 32, label, fs)
+    c.uline(i + 'u', (x1 + x2) / 2 - tw / 2, y - 10, tw * 0.86, PINK)
 
 
 stack('p1', 40, 104, 190, 56, '사람마다 각자 관리한\n엑셀 파일')
@@ -31,11 +29,11 @@ c.arrow('pj2', 246, 218, [[0, 0], [24, -45]], head=None)
 hmsg('pa1', 270, 395, 173, '사람이 수동 통합')
 c.box('p3', 395, 145, 115, 56, '통합한 엑셀', PINK, fs=16)
 c.msg('pa2', 510, 640, 173, '변환 스크립트', fs=14)
-c.box('p4', 640, 145, 120, 56, '서버용 JSON', GRAY, fs=16)
+c.box('p4', 640, 145, 120, 56, '서버용 JSON', None, fs=16)
 hmsg('pa3', 760, 890, 173, '사람이 업로드')
-c.box('p5', 890, 145, 60, 56, 'S3', GRAY, fs=17)
+c.box('p5', 890, 145, 60, 56, 'S3', None, fs=17)
 c.arrow('pa4', 950, 173, [[0, 0], [55, 0]])
-c.box('p6', 1005, 145, 110, 56, '운영 EC2', GRAY, fs=16)
+c.box('p6', 1005, 145, 110, 56, '운영 EC2', None, fs=16)
 c.text('p6n', 935, 214, 'systemd가 복사,\n시작 시 Spring이 읽음', 14, MUTED)
 
 c.frame('fa', 20, 300, 1120, 570, '변경 후  승인과 검증 단계를 거치는 관리자 시스템', LAV2)

@@ -42,7 +42,7 @@ class Canvas:
             s["roundness"] = b["roundness"] = {"type": 3}
         if dashed:
             b["strokeStyle"] = "dashed"; b["strokeColor"] = MUTED
-        self.E.extend([s, b])
+        self.E.extend([s, b] if shadow else [b])
 
     def arrow(self, i, x, y, pts, label=None, dashed=False, color=INK, head="arrow", fs=16):
         d = {"type": "arrow", "id": i, "x": x, "y": y, "width": pts[-1][0], "height": pts[-1][1], "points": pts,
