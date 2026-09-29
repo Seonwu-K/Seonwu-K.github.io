@@ -91,6 +91,7 @@ figcaption { margin: 10px 0 0; font-size: 12px; line-height: 1.7; color: var(--m
 .psr li::marker { color: var(--muted); font-size: .8em; }
 .psr li + li { margin-top: 12px; }
 .psr li b { color: var(--ink); font-weight: 600; }
+.psr .psr-note { grid-column: 2; margin: 10px 0 0; font-size: 13px; line-height: 1.7; color: var(--muted); }
 .psr .result { border-top-color: #9d9d98; padding-bottom: 0; }
 #projects { margin-top: 36px; }
 .project-list { display: grid; }
